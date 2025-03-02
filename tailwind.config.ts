@@ -143,6 +143,18 @@ export default {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
+        "breathe": {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
+        },
+        "wave": {
+          "0%": { transform: "rotate(0deg)" },
+          "20%": { transform: "rotate(14deg)" },
+          "40%": { transform: "rotate(-8deg)" },
+          "60%": { transform: "rotate(14deg)" },
+          "80%": { transform: "rotate(-4deg)" },
+          "100%": { transform: "rotate(0deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -157,12 +169,15 @@ export default {
         "pulse-glow": "pulse-glow 3s ease-in-out infinite",
         "shimmer": "shimmer 2s infinite linear",
         "rotate-slow": "rotate-slow 8s linear infinite",
+        "breathe": "breathe 4s ease-in-out infinite",
+        "wave": "wave 1.5s ease-in-out",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "hero-glow": "radial-gradient(circle at center, rgba(123, 92, 250, 0.15) 0%, rgba(19, 19, 26, 0) 70%)",
         "card-gradient": "linear-gradient(to bottom right, rgba(30, 30, 40, 0.9), rgba(20, 20, 28, 0.7))",
         "glow-line": "linear-gradient(90deg, rgba(123, 92, 250, 0) 0%, rgba(123, 92, 250, 0.3) 50%, rgba(123, 92, 250, 0) 100%)",
+        "pricing-gradient": "linear-gradient(135deg, rgba(30, 30, 40, 0.6), rgba(20, 20, 28, 0.8))",
       },
       boxShadow: {
         "glow-sm": "0 0 10px rgba(123, 92, 250, 0.3)",
