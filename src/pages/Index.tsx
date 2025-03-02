@@ -1,13 +1,84 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import LandingPage from '../components/LandingPage';
+import Questionnaire from '../components/Questionnaire';
+import Dashboard from '../components/Dashboard';
+import { usePreferences } from '../hooks/usePreferences';
 
 const Index = () => {
+  const [currentView, setCurrentView] = useState<'landing' | 'questionnaire' | 'dashboard'>('landing');
+  const { 
+    preferences, 
+    updateInterests, 
+    updateFrequency, 
+    updatePricingPreference,
+    completeQuestionnaire,
+    resetPreferences 
+  } = usePreferences();
+
+  // If user has already completed the questionnaire, show the dashboard
+  React.useEffect(() => {
+    if (preferences.completedQuestionnaire) {
+      setCurrentView('dashboard');
+    }
+  }, [preferences.completedQuestionnaire]);
+
+  const handleGetStarted = () => {
+    setCurrentView('questionnaire');
+  };
+
+  const handleBackToLanding = () => {
+    setCurrentView('landing');
+  };
+
+  const handleCompleteQuestionnaire = () => {
+    setCurrentView('dashboard');
+  };
+
+  const handleResetPreferences = () => {
+    resetPreferences();
+    setCurrentView('landing');
+  };
+
+  const handleUpdatePreference = (
+    key: keyof Omit<typeof preferences, 'completedQuestionnaire'>,
+    value: any
+  ) => {
+    switch (key) {
+      case 'interests':
+        updateInterests(value);
+        break;
+      case 'frequency':
+        updateFrequency(value);
+        break;
+      case 'pricingPreference':
+        updatePricingPreference(value);
+        break;
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <>
+      {currentView === 'landing' && (
+        <LandingPage onGetStarted={handleGetStarted} />
+      )}
+      
+      {currentView === 'questionnaire' && (
+        <Questionnaire
+          updatePreferences={handleUpdatePreference}
+          completeQuestionnaire={completeQuestionnaire}
+          onBack={handleBackToLanding}
+          onComplete={handleCompleteQuestionnaire}
+        />
+      )}
+      
+      {currentView === 'dashboard' && (
+        <Dashboard
+          preferences={preferences}
+          onResetPreferences={handleResetPreferences}
+        />
+      )}
+    </>
   );
 };
 
