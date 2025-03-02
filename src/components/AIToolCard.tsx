@@ -9,6 +9,7 @@ export interface AITool {
   category: string;
   icon: string;
   url: string;
+  tags?: string[];
 }
 
 interface AIToolCardProps {

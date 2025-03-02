@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import Navbar from './Navbar';
@@ -174,7 +173,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
 
 // Feature data
 import { 
-  MessageSquare, Code, Brush, Video, Robot, Search, 
+  MessageSquare, Code, Brush, Video, Bot, Search, 
   Zap, Lock, Clock, Layers, Users, LineChart 
 } from 'lucide-react';
 
@@ -202,7 +201,7 @@ const features = [
   {
     title: 'Automation Tools',
     description: 'Automate workflows and repetitive tasks with powerful AI automation.',
-    icon: Robot
+    icon: Bot
   },
   {
     title: 'Universal Search',
