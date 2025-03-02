@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowDown, ArrowRight, Bot, Star, Users, Zap, Code, Brush, Video, Search, Lock, Clock, MessageSquare, LineChart, ChevronUp, Github, Twitter, Linkedin, Instagram } from 'lucide-react';
 import Navbar from './Navbar';
@@ -21,7 +20,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Text animation effect
   useEffect(() => {
     const heroText = "One platform for all your AI tools & needs";
     const animationDelay = 40; // ms between each character
@@ -40,7 +38,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
     }
   }, [isLoaded]);
 
-  // Parallax scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -49,7 +46,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
       const heroBackground = document.querySelector('.hero-gradient');
       
       if (heroSection && heroElements && heroBackground) {
-        // Fix TypeScript error by using proper element casting
         const heroElementsHtmlElement = heroElements as HTMLElement;
         const heroBackgroundHtmlElement = heroBackground as HTMLElement;
         
@@ -65,12 +61,10 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
   }, []);
 
   useEffect(() => {
-    // Simulate loading for animation purposes
     setTimeout(() => {
       setIsLoaded(true);
     }, 200);
 
-    // Auto-rotate testimonials
     const testimonialInterval = setInterval(() => {
       setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
@@ -78,7 +72,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
     return () => clearInterval(testimonialInterval);
   }, []);
 
-  // Animation triggers using intersection observer
   const setFeatureSectionRef = useIntersectionObserver(
     (entry) => {
       if (entry.isIntersecting) {
@@ -139,7 +132,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
     { threshold: 0.2 }
   );
 
-  // 3D tilt effect for CTA button
   useEffect(() => {
     const buttons = document.querySelectorAll('.interactive-button');
     
@@ -165,7 +157,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
     });
   }, [isLoaded]);
 
-  // Filter blog posts by category
   const filteredBlogPosts = activeBlogCategory === 'all' 
     ? blogPosts 
     : blogPosts.filter(post => post.category === activeBlogCategory);
@@ -175,7 +166,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
       <AnimatedBackground />
       <Navbar />
 
-      {/* Hero Section */}
       <section className="hero-section relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         <div className="hero-gradient absolute inset-0 bg-hero-glow opacity-80"></div>
         <div className="container mx-auto text-center z-10 mt-16 hero-elements">
@@ -245,13 +235,11 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
             </div>
           </div>
 
-          {/* Hero Floating Elements */}
           <div className={`relative h-64 md:h-80 mt-8 transition-all duration-1000 transform ${
             isLoaded ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
           }`}>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
               <div className="relative">
-                {/* Central Design Element */}
                 <div className="w-20 h-20 md:w-32 md:h-32 rounded-full bg-one-dark border border-one-border flex items-center justify-center mx-auto shadow-glow-sm">
                   <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-one-accent/5 border border-one-accent/20 flex items-center justify-center pulse-element">
                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-one-accent/10 border border-one-accent/30 flex items-center justify-center">
@@ -260,7 +248,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                   </div>
                 </div>
                 
-                {/* Circular Orbit with glow effect */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-80 md:h-80 rounded-full border border-one-border/30 animate-rotate-slow">
                   <span className="absolute w-4 h-4 bg-one-accent/80 rounded-full top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-glow-md"></span>
                 </div>
@@ -268,7 +255,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                   <span className="absolute w-3 h-3 bg-[#9b87f5]/80 rounded-full top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-glow-sm"></span>
                 </div>
                 
-                {/* Floating AI Cards with enhanced animations */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 md:-translate-y-28 floating-element">
                   <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
                     <div className="text-xs md:text-sm">Chatbots</div>
@@ -294,7 +280,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
           </div>
         </div>
         
-        {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <button onClick={scrollToFeatures} className="text-one-text-muted hover:text-white transition-colors">
             <ArrowDown size={24} />
@@ -302,7 +287,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      {/* Features Section */}
       <section id="features" className="section-container" ref={setFeatureSectionRef}>
         <div className="text-center mb-16">
           <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
@@ -343,7 +327,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      {/* Blog Section */}
       <section id="blog" className="section-container" ref={setBlogSectionRef}>
         <div className="text-center mb-16">
           <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
@@ -356,7 +339,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
             Discover the latest insights, tutorials, and news from the world of AI
           </p>
           
-          {/* Blog Categories */}
           <div className="flex flex-wrap justify-center gap-2 mt-8">
             {['all', 'tutorials', 'news', 'insights', 'case-studies'].map((category) => (
               <button
@@ -417,7 +399,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      {/* Reviews Section */}
       <section id="reviews" className="section-container" ref={setReviewsSectionRef}>
         <div className="text-center mb-16">
           <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
@@ -477,7 +458,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      {/* Final CTA Section */}
       <section id="cta" className="py-24 relative overflow-hidden" ref={setCtaSectionRef}>
         <div className="absolute inset-0 bg-gradient-to-b from-one-dark to-one-darker opacity-80"></div>
         <div className="absolute inset-0 opacity-20">
@@ -515,7 +495,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-one-darker py-12 px-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -595,12 +574,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
   );
 };
 
-// Feature data
-import { 
-  MessageSquare, Code, Brush, Video, Bot, Search, 
-  Zap, Lock, Clock, Layers, Users, LineChart 
-} from 'lucide-react';
-
 const features = [
   {
     title: 'AI Chat Assistants',
@@ -649,7 +622,6 @@ const features = [
   },
 ];
 
-// Blog posts data 
 const blogPosts = [
   {
     title: 'The Future of AI-Powered Workflow Automation',
@@ -659,7 +631,7 @@ const blogPosts = [
     image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
   },
   {
-    title: 'Getting Started with AI Image Generation: A Beginner's Guide',
+    title: "Getting Started with AI Image Generation: A Beginner's Guide",
     excerpt: 'Learn the basics of AI image generation and how to create stunning visuals with simple prompts.',
     category: 'tutorials',
     date: 'May 28, 2023',
@@ -695,7 +667,6 @@ const blogPosts = [
   },
 ];
 
-// Testimonials data
 const testimonials = [
   {
     name: 'Sarah Johnson',
@@ -720,7 +691,6 @@ const testimonials = [
   },
 ];
 
-// Footer links
 const footerLinks = [
   {
     title: 'Product',
