@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowDown, ArrowRight, Bot, Star, Zap, ChevronUp, Github, Twitter, Linkedin, Instagram, Check, Shield, Sparkles, Cpu } from 'lucide-react';
 import Navbar from './Navbar';
@@ -25,7 +24,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Text animation effect
   useEffect(() => {
     const heroText = "One platform for all your AI tools & needs";
     const animationDelay = 40; // ms between each character
@@ -44,7 +42,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
     }
   }, [isLoaded]);
 
-  // Parallax scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -68,12 +65,10 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
   }, []);
 
   useEffect(() => {
-    // Simulate loading for animation purposes
     setTimeout(() => {
       setIsLoaded(true);
     }, 200);
 
-    // Auto-rotate testimonials
     const testimonialInterval = setInterval(() => {
       setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
@@ -81,7 +76,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
     return () => clearInterval(testimonialInterval);
   }, []);
 
-  // Main value proposition section animation
   const setValuePropSectionRef = useIntersectionObserver(
     (entry) => {
       if (entry.isIntersecting) {
@@ -97,7 +91,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
     { threshold: 0.2 }
   );
 
-  // Pricing section animation
   const setPricingSectionRef = useIntersectionObserver(
     (entry) => {
       if (entry.isIntersecting) {
@@ -143,7 +136,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
     { threshold: 0.2 }
   );
 
-  // 3D tilt effect for CTA button
   useEffect(() => {
     const buttons = document.querySelectorAll('.interactive-button');
     
@@ -168,7 +160,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
       });
     });
 
-    // Add hover effects to pricing cards
     const pricingCards = document.querySelectorAll('.pricing-card');
     pricingCards.forEach(card => {
       card.addEventListener('mousemove', (e: any) => {
@@ -197,7 +188,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
       <AnimatedBackground />
       <Navbar />
 
-      {/* Hero Section */}
       <section className="hero-section relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
         <div className="hero-gradient absolute inset-0 bg-hero-glow opacity-80"></div>
         <div className="container mx-auto text-center z-10 mt-16 hero-elements">
@@ -267,13 +257,11 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
             </div>
           </div>
 
-          {/* Hero Floating Elements */}
           <div className={`relative h-64 md:h-80 mt-8 transition-all duration-1000 transform ${
             isLoaded ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
           }`}>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
               <div className="relative">
-                {/* Central Design Element */}
                 <div className="w-20 h-20 md:w-32 md:h-32 rounded-full bg-one-dark border border-one-border flex items-center justify-center mx-auto shadow-glow-sm">
                   <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-one-accent/5 border border-one-accent/20 flex items-center justify-center pulse-element">
                     <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-one-accent/10 border border-one-accent/30 flex items-center justify-center">
@@ -282,7 +270,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                   </div>
                 </div>
                 
-                {/* Circular Orbit with glow effect */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-80 md:h-80 rounded-full border border-one-border/30 animate-rotate-slow">
                   <span className="absolute w-4 h-4 bg-one-accent/80 rounded-full top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-glow-md"></span>
                 </div>
@@ -290,7 +277,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                   <span className="absolute w-3 h-3 bg-[#9b87f5]/80 rounded-full top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-glow-sm"></span>
                 </div>
                 
-                {/* Floating AI Cards with enhanced animations */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 md:-translate-y-28 floating-element">
                   <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
                     <div className="text-xs md:text-sm">Chatbots</div>
@@ -316,7 +302,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
           </div>
         </div>
         
-        {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <button onClick={scrollToFeatures} className="text-one-text-muted hover:text-white transition-colors">
             <ArrowDown size={24} />
@@ -324,7 +309,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      {/* Value Proposition Section - Replacing Features Section */}
       <section id="features" className="section-container py-24" ref={setValuePropSectionRef}>
         <div className="text-center mb-20">
           <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
@@ -339,7 +323,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {valuePropItems.map((item, index) => (
+          {features.map((item, index) => (
             <div 
               key={index} 
               className="value-prop-item flex gap-6 opacity-0 transition-all duration-500"
@@ -359,9 +343,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      {/* Pricing Section - New */}
       <section id="pricing" className="section-container py-24 bg-one-darker relative overflow-hidden" ref={setPricingSectionRef}>
-        {/* Background Decorations */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
@@ -379,7 +361,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
               Simple, transparent pricing that scales with your requirements.
             </p>
             
-            {/* Pricing Toggle */}
             <div className="flex items-center justify-center space-x-4 mb-12">
               <span className={`text-sm font-medium transition-colors duration-300 ${activePricingPlan === 'monthly' ? 'text-white' : 'text-one-text-muted'}`}>
                 Monthly
@@ -457,7 +438,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      {/* Reviews Section - Kept but enhanced */}
       <section id="reviews" className="section-container" ref={setReviewsSectionRef}>
         <div className="text-center mb-16">
           <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
@@ -517,7 +497,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      {/* Final CTA Section - Enhanced */}
       <section id="cta" className="py-24 relative overflow-hidden" ref={setCtaSectionRef}>
         <div className="absolute inset-0 bg-gradient-to-b from-one-dark to-one-darker opacity-80"></div>
         <div className="absolute inset-0 opacity-20">
@@ -555,7 +534,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      {/* Footer - Enhanced */}
       <footer className="bg-one-darker py-12 px-4">
         <div className="container mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -635,8 +613,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
   );
 };
 
-// New value proposition items for WHY section
-const valuePropItems = [
+const features = [
   {
     title: 'All-in-One AI Platform',
     description: 'One unified interface for all your AI needs. No more switching between different tools and platforms.',
@@ -669,7 +646,6 @@ const valuePropItems = [
   },
 ];
 
-// Pricing plans data
 const pricingPlans = [
   {
     name: 'Starter',
@@ -730,7 +706,6 @@ const pricingPlans = [
   }
 ];
 
-// Testimonials data
 const testimonials = [
   {
     name: 'Sarah Johnson',
@@ -755,7 +730,51 @@ const testimonials = [
   },
 ];
 
-// Footer links
+const blogPosts = [
+  {
+    title: 'The Future of AI-Powered Workflow Automation',
+    excerpt: 'Discover how AI is revolutionizing workflow automation and increasing productivity across industries.',
+    category: 'insights',
+    date: 'June 15, 2023',
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+  },
+  {
+    title: "Getting Started with AI Image Generation: A Beginner's Guide",
+    excerpt: 'Learn the basics of AI image generation and how to create stunning visuals with simple prompts.',
+    category: 'tutorials',
+    date: 'May 28, 2023',
+    image: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+  },
+  {
+    title: 'How AI is Transforming the Creative Industry',
+    excerpt: 'An in-depth look at how artificial intelligence is changing the landscape for designers, writers, and artists.',
+    category: 'insights',
+    date: 'May 12, 2023',
+    image: 'https://images.unsplash.com/photo-1619450463848-41fba8a3114b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+  },
+  {
+    title: 'Building Your First AI-Powered Chatbot',
+    excerpt: 'Step-by-step tutorial on how to create and deploy your first AI chatbot using modern frameworks.',
+    category: 'tutorials',
+    date: 'April 30, 2023',
+    image: 'https://images.unsplash.com/photo-1677442135146-2c6ba474b4b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+  },
+  {
+    title: 'AI Breakthroughs: Top 10 Innovations of 2023',
+    excerpt: 'Explore the most significant AI advancements and breakthroughs that happened this year.',
+    category: 'news',
+    date: 'April 22, 2023',
+    image: 'https://images.unsplash.com/photo-1647166545674-ce28ce93bdca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+  },
+  {
+    title: 'How a Fintech Company Reduced Costs by 40% Using AI',
+    excerpt: 'Case study on how artificial intelligence helped optimize operations and reduce overhead.',
+    category: 'case-studies',
+    date: 'April 15, 2023',
+    image: 'https://images.unsplash.com/photo-1617791160505-6f00504e3519?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
+  },
+];
+
 const footerLinks = [
   {
     title: 'Product',
