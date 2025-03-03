@@ -277,14 +277,9 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                   <span className="absolute w-3 h-3 bg-[#9b87f5]/80 rounded-full top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-glow-sm"></span>
                 </div>
                 
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-3/4 md:-translate-y-28 floating-element">
+                <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2 md:-translate-x-20 floating-element" style={{ animationDelay: '2s' }}>
                   <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
-                    <div className="text-xs md:text-sm">Chatbots</div>
-                  </div>
-                </div>
-                <div className="absolute top-1/2 left-3/4 transform -translate-y-1/4 md:translate-x-20 floating-element" style={{ animationDelay: '1s' }}>
-                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
-                    <div className="text-xs md:text-sm">Code AI</div>
+                    <div className="text-xs md:text-sm">Video AI</div>
                   </div>
                 </div>
                 <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 md:translate-y-10 floating-element" style={{ animationDelay: '1.5s' }}>
@@ -292,9 +287,14 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                     <div className="text-xs md:text-sm">Design AI</div>
                   </div>
                 </div>
+                <div className="absolute top-1/2 left-3/4 transform -translate-y-1/4 md:translate-x-20 floating-element" style={{ animationDelay: '1s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-xs md:text-sm">Code AI</div>
+                  </div>
+                </div>
                 <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2 md:-translate-x-20 floating-element" style={{ animationDelay: '2s' }}>
                   <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
-                    <div className="text-xs md:text-sm">Video AI</div>
+                    <div className="text-xs md:text-sm">Chatbots</div>
                   </div>
                 </div>
               </div>
