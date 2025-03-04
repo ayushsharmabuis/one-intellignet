@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowDown, ArrowRight, Bot, Star, Zap, ChevronUp, Github, Twitter, Linkedin, Instagram, Check, Shield, Sparkles, Cpu } from 'lucide-react';
 import Navbar from './Navbar';
@@ -53,8 +54,13 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         const heroElementsHtmlElement = heroElements as HTMLElement;
         const heroBackgroundHtmlElement = heroBackground as HTMLElement;
         
-        heroElementsHtmlElement.style.transform = `translateY(${scrollY * 0.4}px)`;
-        heroBackgroundHtmlElement.style.transform = `translateY(${scrollY * 0.2}px)`;
+        // Limit the maximum transform to prevent hanging appearance
+        const maxTransform = 100;
+        const elementTransform = Math.min(scrollY * 0.4, maxTransform);
+        const bgTransform = Math.min(scrollY * 0.2, maxTransform/2);
+        
+        heroElementsHtmlElement.style.transform = `translateY(${elementTransform}px)`;
+        heroBackgroundHtmlElement.style.transform = `translateY(${bgTransform}px)`;
       }
     };
 
@@ -196,7 +202,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
           }`}>
             <div className="inline-block mb-4">
               <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20 animate-pulse-glow">
-                The Future of AI Interaction
+                ALL AI ONE PLATFORM
               </span>
             </div>
             
@@ -215,7 +221,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                     {char === ' ' ? '\u00A0' : char}
                   </span>
                 ))}
-                <span className="inline-block animate-pulse">|</span>
               </span>
               <span className="text-one-accent block transform-gpu animate-slide-in-bottom" style={{ animationDelay: '1.5s', opacity: 0, animationFillMode: 'forwards' }}>
                 AI tools & needs
@@ -352,10 +357,10 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         <div className="relative z-10">
           <div className="text-center mb-16">
             <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
-              Pricing Plans
+              ALL AI ONE PLATFORM
             </span>
             <h2 className="text-3xl md:text-5xl font-bold mt-4 mb-6">
-              Choose the Perfect Plan for Your Needs
+              Access AI Tools at Affordable Prices with Seamless Experience
             </h2>
             <p className="text-one-text-muted max-w-2xl mx-auto text-lg mb-8">
               Simple, transparent pricing that scales with your requirements.
@@ -398,8 +403,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                 <p className="text-one-text-muted text-sm mb-4">{plan.description}</p>
                 
                 <div className="mb-6">
-                  <span className="text-3xl font-bold">${activePricingPlan === 'monthly' ? plan.price.monthly : plan.price.annual}</span>
-                  <span className="text-one-text-muted">/{activePricingPlan === 'monthly' ? 'mo' : 'yr'}</span>
+                  <span className="text-3xl font-bold">Contact Us</span>
                 </div>
                 
                 <ul className="space-y-3 mb-8">
@@ -420,7 +424,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                       : 'bg-one-light text-one-text hover:bg-one-border'
                   }`}
                 >
-                  Get Started
+                  Contact Us
                 </button>
               </div>
             ))}
@@ -467,7 +471,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                         />
                       ))}
                     </div>
-                    <p className="text-one-text mb-6 italic">"{testimonial.text}"</p>
+                    <p className="text-one-text mb-6 italic">{testimonial.text}</p>
                     <div className="flex items-center justify-center mb-2">
                       <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-one-accent">
                         <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
@@ -499,8 +503,8 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
 
       <section id="cta" className="py-24 relative overflow-hidden" ref={setCtaSectionRef}>
         <div className="absolute inset-0 bg-gradient-to-b from-one-dark to-one-darker opacity-80"></div>
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('/placeholder.svg')] bg-cover bg-center"></div>
+        <div className="absolute inset-0 opacity-40">
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1641427062152-058476661cf3?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -514,7 +518,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
             </h2>
             
             <p className="text-one-text-muted text-lg mb-10 cta-animated opacity-0" style={{ animationDelay: '0.2s' }}>
-              Join thousands of professionals using One-Intelligent to streamline their AI workflow and boost productivity.
+              Access AI Tools at Affordable Prices with Seamless Experience
             </p>
             
             <div className="cta-animated opacity-0" style={{ animationDelay: '0.3s' }}>
@@ -523,7 +527,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                 className="interactive-button text-lg relative overflow-hidden group/cta px-8 py-4"
               >
                 <span className="relative z-10 flex items-center">
-                  Start Your AI Journey
+                  Contact Us
                   <ArrowRight className="ml-2 inline-block transition-transform duration-300 group-hover/cta:translate-x-1" size={20} />
                 </span>
                 <span className="absolute inset-0 bg-gradient-to-r from-[#7B5CFA] to-[#9B87F5] opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500"></span>
@@ -711,21 +715,21 @@ const testimonials = [
     name: 'Sarah Johnson',
     title: 'Product Designer',
     avatar: 'https://randomuser.me/api/portraits/women/11.jpg',
-    text: 'One-Intelligent completely transformed my workflow. I now have access to all my favorite AI tools in one place, saving me hours every week.',
+    text: "One-Intelligent completely transformed my workflow. I now have access to all my favorite AI tools in one place, saving me hours every week.",
     rating: 5
   },
   {
     name: 'Michael Chen',
     title: 'Software Engineer',
     avatar: 'https://randomuser.me/api/portraits/men/46.jpg',
-    text: 'As a developer, I rely on multiple AI tools daily. Having them all integrated in One-Intelligent has boosted my productivity tremendously.',
+    text: "As a developer, I rely on multiple AI tools daily. Having them all integrated in One-Intelligent has boosted my productivity tremendously.",
     rating: 5
   },
   {
     name: 'Emily Rodriguez',
     title: 'Content Creator',
     avatar: 'https://randomuser.me/api/portraits/women/28.jpg',
-    text: 'The personalized recommendations and seamless integration between different AI tools make One-Intelligent an essential part of my creative process.',
+    text: "The personalized recommendations and seamless integration between different AI tools make One-Intelligent an essential part of my creative process.",
     rating: 4
   },
 ];
