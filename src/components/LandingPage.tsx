@@ -25,7 +25,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
   };
 
   useEffect(() => {
-    const heroText = "One platform for all your AI tools & needs";
+    const heroText = "Now Easy Your Workflow With One-Intelligent";
     const animationDelay = 40; // ms between each character
 
     const animateText = async () => {
@@ -53,10 +53,9 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         const heroElementsHtmlElement = heroElements as HTMLElement;
         const heroBackgroundHtmlElement = heroBackground as HTMLElement;
         
-        // Limit the maximum transform to prevent hanging appearance
-        const maxTransform = 100;
-        const elementTransform = Math.min(scrollY * 0.4, maxTransform);
-        const bgTransform = Math.min(scrollY * 0.2, maxTransform/2);
+        const maxTransform = 80; // Reduced from 100
+        const elementTransform = Math.min(scrollY * 0.3, maxTransform); // Reduced from 0.4
+        const bgTransform = Math.min(scrollY * 0.15, maxTransform/2); // Reduced from 0.2
         
         heroElementsHtmlElement.style.transform = `translateY(${elementTransform}px)`;
         heroBackgroundHtmlElement.style.transform = `translateY(${bgTransform}px)`;
@@ -193,9 +192,9 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
       <AnimatedBackground />
       <Navbar />
 
-      <section className="hero-section relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+      <section className="hero-section relative min-h-screen flex items-center justify-center px-4 overflow-hidden pt-20 pb-40">
         <div className="hero-gradient absolute inset-0 bg-hero-glow opacity-80"></div>
-        <div className="container mx-auto text-center z-10 mt-16 hero-elements">
+        <div className="container mx-auto text-center z-10 mt-16 hero-elements pl-4 md:pl-12">
           <div className={`transition-all duration-1000 transform ${
             isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
           }`}>
@@ -205,7 +204,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
               </span>
             </div>
             
-            <h1 ref={heroTextRef} className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight leading-tight overflow-hidden">
+            <h1 ref={heroTextRef} className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight leading-tight overflow-hidden">
               <span className="block mb-2 relative">
                 {animatedText.map((char, index) => (
                   <span 
@@ -313,7 +312,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="features" className="section-container py-32" ref={setValuePropSectionRef}>
+      <section id="features" className="section-container py-40" ref={setValuePropSectionRef}>
         <div className="text-center mb-20">
           <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
             Why One-Intelligent
@@ -347,7 +346,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="pricing" className="section-container py-32 bg-one-darker relative overflow-hidden" ref={setPricingSectionRef}>
+      <section id="pricing" className="section-container py-40 bg-one-darker relative overflow-hidden" ref={setPricingSectionRef}>
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
@@ -441,7 +440,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="reviews" className="section-container py-32" ref={setReviewsSectionRef}>
+      <section id="reviews" className="section-container py-40" ref={setReviewsSectionRef}>
         <div className="text-center mb-16">
           <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
             What Users Say
@@ -500,10 +499,10 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="cta" className="py-32 relative overflow-hidden" ref={setCtaSectionRef}>
+      <section id="cta" className="py-40 relative overflow-hidden" ref={setCtaSectionRef}>
         <div className="absolute inset-0 bg-gradient-to-b from-one-dark to-one-darker opacity-80"></div>
         <div className="absolute inset-0 opacity-40">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1641427062152-058476661cf3?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/lovable-uploads/672377fb-2f9b-461b-b1cc-3da4a8cdb022.png')] bg-cover bg-center"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -516,7 +515,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
               Now Ready To <span className="text-one-accent">Access AI Tools</span> In Just A One Place.
             </h2>
             
-            <p className="text-one-text-muted text-lg mb-6 cta-animated opacity-0" style={{ animationDelay: '0.2s' }}>
+            <p className="text-one-text-muted text-sm mb-6 cta-animated opacity-0" style={{ animationDelay: '0.2s' }}>
               One platform for all your AI tools & needs
             </p>
             
@@ -526,7 +525,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                 className="interactive-button text-lg relative overflow-hidden group/cta px-8 py-4"
               >
                 <span className="relative z-10 flex items-center">
-                  Contact Us To Get Started
+                  Get Started
                   <ArrowRight className="ml-2 inline-block transition-transform duration-300 group-hover/cta:translate-x-1" size={20} />
                 </span>
                 <span className="absolute inset-0 bg-gradient-to-r from-[#7B5CFA] to-[#9B87F5] opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500"></span>

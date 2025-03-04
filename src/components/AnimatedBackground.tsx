@@ -13,14 +13,14 @@ const AnimatedBackground: React.FC = () => {
     
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = window.innerHeight * 1.5; // Increased height to make the animation taller
     };
     
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     
     const particles: Particle[] = [];
-    const particleCount = 50;
+    const particleCount = 80; // Increased particle count
     
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -107,7 +107,7 @@ const AnimatedBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full -z-10 opacity-50"
+      className="fixed top-0 left-0 w-full h-full -z-10 opacity-60" // Increased opacity
     />
   );
 };
