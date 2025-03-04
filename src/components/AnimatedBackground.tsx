@@ -13,21 +13,21 @@ const AnimatedBackground: React.FC = () => {
     
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 1.5; // Increased height to make the animation taller
+      canvas.height = window.innerHeight * 2; // Increased height for better coverage
     };
     
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     
     const particles: Particle[] = [];
-    const particleCount = 80; // Increased particle count
+    const particleCount = 100; // Increased particle count for fuller animation
     
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: Math.random() * 2 + 0.5,
-        color: `rgba(155, 135, 245, ${Math.random() * 0.5 + 0.3})`,
+        color: `rgba(155, 135, 245, ${Math.random() * 0.6 + 0.3})`, // Brighter particles
         velocity: {
           x: Math.random() * 0.5 - 0.25,
           y: Math.random() * 0.5 - 0.25
@@ -43,15 +43,15 @@ const AnimatedBackground: React.FC = () => {
       // Create gradient background
       const gradient = ctx.createRadialGradient(
         canvas.width / 2,
-        canvas.height / 2,
+        canvas.height / 3, // Moved up for better hero section coverage
         0,
         canvas.width / 2,
-        canvas.height / 2,
+        canvas.height / 3,
         canvas.width * 0.8
       );
       
-      gradient.addColorStop(0, 'rgba(20, 20, 30, 0.4)');
-      gradient.addColorStop(1, 'rgba(10, 10, 20, 0.1)');
+      gradient.addColorStop(0, 'rgba(20, 20, 30, 0.5)');
+      gradient.addColorStop(1, 'rgba(10, 10, 20, 0.2)');
       
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -74,7 +74,7 @@ const AnimatedBackground: React.FC = () => {
         }
       });
       
-      // Draw connecting lines
+      // Draw connecting lines with increased connection distance
       ctx.strokeStyle = 'rgba(155, 135, 245, 0.15)';
       ctx.lineWidth = 0.3;
       
@@ -84,7 +84,7 @@ const AnimatedBackground: React.FC = () => {
           const dy = particles[i].y - particles[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
           
-          if (distance < 150) {
+          if (distance < 180) { // Increased connection distance
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -107,7 +107,7 @@ const AnimatedBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full -z-10 opacity-60" // Increased opacity
+      className="fixed top-0 left-0 w-full h-full -z-10 opacity-70" // Increased opacity
     />
   );
 };

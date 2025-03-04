@@ -24,6 +24,7 @@ const Index = () => {
   }, [preferences.completedQuestionnaire]);
 
   const handleGetStarted = () => {
+    console.log("Get Started clicked, navigating to questionnaire");
     setCurrentView('questionnaire');
   };
 

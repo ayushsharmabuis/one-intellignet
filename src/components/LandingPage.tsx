@@ -192,112 +192,119 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
       <AnimatedBackground />
       <Navbar />
 
-      <section className="hero-section relative min-h-screen flex items-center justify-center px-4 overflow-hidden pt-20 pb-40">
+      <section className="hero-section relative min-h-screen flex items-center px-4 overflow-hidden pt-20 pb-32">
         <div className="hero-gradient absolute inset-0 bg-hero-glow opacity-80"></div>
-        <div className="container mx-auto text-center z-10 mt-16 hero-elements pl-4 md:pl-12">
-          <div className={`transition-all duration-1000 transform ${
-            isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
-          }`}>
-            <div className="inline-block mb-4">
-              <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20 animate-pulse-glow">
-                ALL AI ONE PLATFORM
-              </span>
-            </div>
-            
-            <h1 ref={heroTextRef} className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 tracking-tight leading-tight overflow-hidden">
-              <span className="block mb-2 relative">
-                {animatedText.map((char, index) => (
-                  <span 
-                    key={index} 
-                    className="inline-block animate-fade-in"
-                    style={{ 
-                      animationDelay: `${index * 0.03}s`,
-                      opacity: 0,
-                      animationFillMode: 'forwards'
-                    }}
-                  >
-                    {char === ' ' ? '\u00A0' : char}
+        <div className="container mx-auto z-10 mt-12 hero-elements pl-4 lg:pl-16">
+          <div className="flex flex-col lg:flex-row items-center">
+            <div className={`lg:w-1/2 transition-all duration-1000 transform ${
+              isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+            }`}>
+              <div className="inline-block mb-4">
+                <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20 animate-pulse-glow">
+                  ALL AI ONE PLATFORM
+                </span>
+              </div>
+              
+              <h1 ref={heroTextRef} className="text-3xl md:text-4xl font-bold mb-6 tracking-tight leading-tight overflow-hidden">
+                <span className="block mb-2 relative">
+                  {animatedText.map((char, index) => (
+                    <span 
+                      key={index} 
+                      className="inline-block animate-fade-in"
+                      style={{ 
+                        animationDelay: `${index * 0.03}s`,
+                        opacity: 0,
+                        animationFillMode: 'forwards'
+                      }}
+                    >
+                      {char === ' ' ? '\u00A0' : char}
+                    </span>
+                  ))}
+                </span>
+                <span className="text-one-accent block transform-gpu animate-slide-in-bottom" style={{ animationDelay: '1.5s', opacity: 0, animationFillMode: 'forwards' }}>
+                  AI tools & needs
+                </span>
+              </h1>
+              
+              <p ref={heroSubtitleRef} className="max-w-xl text-one-text-muted text-lg mb-8 transform-gpu animate-slide-in-bottom" style={{ animationDelay: '1.8s', opacity: 0, animationFillMode: 'forwards' }}>
+                Discover, access, and manage all your AI tools in one intelligent platform
+                designed for seamless integration and maximum productivity.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row justify-start gap-4 mb-16 transform-gpu animate-slide-in-bottom" style={{ animationDelay: '2s', opacity: 0, animationFillMode: 'forwards' }}>
+                <button 
+                  onClick={onGetStarted}
+                  className="interactive-button text-lg relative overflow-hidden group/button hero-get-started-btn"
+                >
+                  <span className="relative z-10 flex items-center">
+                    Get Started
+                    <ArrowRight className="ml-2 inline-block transition-transform duration-300 group-hover/button:translate-x-1" size={18} />
                   </span>
-                ))}
-              </span>
-              <span className="text-one-accent block transform-gpu animate-slide-in-bottom" style={{ animationDelay: '1.5s', opacity: 0, animationFillMode: 'forwards' }}>
-                AI tools & needs
-              </span>
-            </h1>
-            
-            <p ref={heroSubtitleRef} className="max-w-2xl mx-auto text-one-text-muted text-lg mb-8 transform-gpu animate-slide-in-bottom" style={{ animationDelay: '1.8s', opacity: 0, animationFillMode: 'forwards' }}>
-              Discover, access, and manage all your AI tools in one intelligent platform
-              designed for seamless integration and maximum productivity.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16 transform-gpu animate-slide-in-bottom" style={{ animationDelay: '2s', opacity: 0, animationFillMode: 'forwards' }}>
-              <button 
-                onClick={onGetStarted}
-                className="interactive-button text-lg relative overflow-hidden group/button"
-              >
-                <span className="relative z-10 flex items-center">
-                  Get Started
-                  <ArrowRight className="ml-2 inline-block transition-transform duration-300 group-hover/button:translate-x-1" size={18} />
-                </span>
-                <span className="absolute inset-0 bg-one-accent transition-all duration-300 group-hover/button:opacity-80"></span>
-                <span className="absolute inset-0 opacity-0 group-hover/button:opacity-100 transition-opacity duration-300">
-                  <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#9b87f5] via-[#7B5CFA] to-[#8F74FF] animate-pulse-glow"></span>
-                </span>
-                <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent transform translate-x-full group-hover/button:translate-x-[-100%] transition-transform duration-1000"></span>
-              </button>
-              <button 
-                onClick={scrollToPricing}
-                className="px-6 py-3 rounded-lg font-medium transition-all duration-300
-                          bg-one-light text-one-text-muted hover:text-white hover:bg-opacity-80
-                          transform hover:-translate-y-1 active:translate-y-0 relative overflow-hidden"
-              >
-                <span className="relative z-10 flex items-center">
-                  View Pricing
-                  <ArrowDown className="ml-2 inline-block" size={18} />
-                </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-one-accent/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></span>
-              </button>
+                  <span className="absolute inset-0 bg-one-accent transition-all duration-300 group-hover/button:opacity-80"></span>
+                  <span className="absolute inset-0 opacity-0 group-hover/button:opacity-100 transition-opacity duration-300">
+                    <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#9b87f5] via-[#7B5CFA] to-[#8F74FF] animate-pulse-glow"></span>
+                  </span>
+                  <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent transform translate-x-full group-hover/button:translate-x-[-100%] transition-transform duration-1000"></span>
+                </button>
+                <button 
+                  onClick={scrollToPricing}
+                  className="px-6 py-3 rounded-lg font-medium transition-all duration-300
+                            bg-one-light text-one-text-muted hover:text-white hover:bg-opacity-80
+                            transform hover:-translate-y-1 active:translate-y-0 relative overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center">
+                    View Pricing
+                    <ArrowDown className="ml-2 inline-block" size={18} />
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-one-accent/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></span>
+                </button>
+              </div>
             </div>
-          </div>
 
-          <div className={`relative h-64 md:h-80 mt-8 transition-all duration-1000 transform ${
-            isLoaded ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
-          }`}>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
-              <div className="relative">
-                <div className="w-20 h-20 md:w-32 md:h-32 rounded-full bg-one-dark border border-one-border flex items-center justify-center mx-auto shadow-glow-sm">
-                  <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-one-accent/5 border border-one-accent/20 flex items-center justify-center pulse-element">
-                    <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-one-accent/10 border border-one-accent/30 flex items-center justify-center">
-                      <div className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-one-accent animate-pulse-glow"></div>
+            <div className={`lg:w-1/2 relative h-96 transition-all duration-1000 transform ${
+              isLoaded ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+            }`}>
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-one-dark border border-one-border flex items-center justify-center mx-auto shadow-glow-sm">
+                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-one-accent/5 border border-one-accent/20 flex items-center justify-center pulse-element">
+                      <div className="w-16 h-16 md:w-16 md:h-16 rounded-full bg-one-accent/10 border border-one-accent/30 flex items-center justify-center">
+                        <div className="w-8 h-8 md:w-8 md:h-8 rounded-full bg-one-accent animate-pulse-glow"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 md:w-80 md:h-80 rounded-full border border-one-border/30 animate-rotate-slow">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-80 md:h-80 rounded-full border border-one-border/30 animate-rotate-slow">
                   <span className="absolute w-4 h-4 bg-one-accent/80 rounded-full top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-glow-md"></span>
                 </div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-96 md:h-96 rounded-full border border-one-border/20 animate-rotate-slow" style={{ animationDuration: '15s' }}>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 md:w-96 md:h-96 rounded-full border border-one-border/20 animate-rotate-slow" style={{ animationDuration: '15s' }}>
                   <span className="absolute w-3 h-3 bg-[#9b87f5]/80 rounded-full top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-glow-sm"></span>
                 </div>
                 
-                <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2 md:-translate-x-20 floating-element" style={{ animationDelay: '2s' }}>
+                <div className="absolute top-1/4 left-1/4 transform -translate-y-1/2 -translate-x-1/2 floating-element" style={{ animationDelay: '1s' }}>
                   <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
-                    <div className="text-xs md:text-sm">Video AI</div>
+                    <div className="text-xs md:text-sm">Chatbots</div>
                   </div>
                 </div>
-                <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 md:translate-y-10 floating-element" style={{ animationDelay: '1.5s' }}>
-                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
-                    <div className="text-xs md:text-sm">Design AI</div>
-                  </div>
-                </div>
-                <div className="absolute top-1/2 left-3/4 transform -translate-y-1/4 md:translate-x-20 floating-element" style={{ animationDelay: '1s' }}>
+                <div className="absolute top-1/2 right-1/4 transform -translate-y-1/2 translate-x-1/2 floating-element" style={{ animationDelay: '1.5s' }}>
                   <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
                     <div className="text-xs md:text-sm">Code AI</div>
                   </div>
                 </div>
-                <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2 md:-translate-x-20 floating-element" style={{ animationDelay: '2s' }}>
+                <div className="absolute bottom-1/4 left-1/2 transform translate-y-1/4 -translate-x-1/2 floating-element" style={{ animationDelay: '2s' }}>
                   <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
-                    <div className="text-xs md:text-sm">Chatbots</div>
+                    <div className="text-xs md:text-sm">Design AI</div>
+                  </div>
+                </div>
+                <div className="absolute top-1/2 left-1/6 transform -translate-y-1/2 floating-element" style={{ animationDelay: '2.5s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-xs md:text-sm">Image AI</div>
+                  </div>
+                </div>
+                <div className="absolute bottom-1/4 right-1/6 transform translate-y-1/2 floating-element" style={{ animationDelay: '1.8s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-xs md:text-sm">Video AI</div>
                   </div>
                 </div>
               </div>
@@ -305,7 +312,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
           </div>
         </div>
         
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce">
           <button onClick={scrollToFeatures} className="text-one-text-muted hover:text-white transition-colors">
             <ArrowDown size={24} />
           </button>
@@ -499,10 +506,10 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="cta" className="py-40 relative overflow-hidden" ref={setCtaSectionRef}>
+      <section id="cta" className="py-40 relative overflow-hidden mt-24" ref={setCtaSectionRef}>
         <div className="absolute inset-0 bg-gradient-to-b from-one-dark to-one-darker opacity-80"></div>
         <div className="absolute inset-0 opacity-40">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('/lovable-uploads/672377fb-2f9b-461b-b1cc-3da4a8cdb022.png')] bg-cover bg-center"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/lovable-uploads/9092faf0-1f11-4eb6-b372-f68ccf274d6e.png')] bg-cover bg-center"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -515,7 +522,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
               Now Ready To <span className="text-one-accent">Access AI Tools</span> In Just A One Place.
             </h2>
             
-            <p className="text-one-text-muted text-sm mb-6 cta-animated opacity-0" style={{ animationDelay: '0.2s' }}>
+            <p className="text-one-text-muted text-xs mb-8 cta-animated opacity-0" style={{ animationDelay: '0.2s' }}>
               One platform for all your AI tools & needs
             </p>
             
