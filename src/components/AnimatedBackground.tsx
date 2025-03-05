@@ -20,17 +20,17 @@ const AnimatedBackground: React.FC = () => {
     resizeCanvas();
     
     const particles: Particle[] = [];
-    const particleCount = 150; // Increased particle count for fuller animation
+    const particleCount = 120; // Reduced slightly for better text visibility
     
     for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        radius: Math.random() * 2.5 + 0.8, // Larger particles
-        color: `rgba(155, 135, 245, ${Math.random() * 0.7 + 0.4})`, // Brighter particles
+        radius: Math.random() * 2 + 0.8, // Slightly smaller particles
+        color: `rgba(155, 135, 245, ${Math.random() * 0.6 + 0.2})`, // Lower opacity for better text contrast
         velocity: {
-          x: Math.random() * 0.6 - 0.3,
-          y: Math.random() * 0.6 - 0.3
+          x: Math.random() * 0.5 - 0.25,
+          y: Math.random() * 0.5 - 0.25
         }
       });
     }
@@ -40,18 +40,18 @@ const AnimatedBackground: React.FC = () => {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // Create gradient background
+      // Create gradient background with reduced opacity
       const gradient = ctx.createRadialGradient(
         canvas.width / 2,
-        canvas.height / 3, // Moved up for better hero section coverage
+        canvas.height / 3,
         0,
         canvas.width / 2,
         canvas.height / 3,
         canvas.width * 0.9
       );
       
-      gradient.addColorStop(0, 'rgba(25, 25, 35, 0.6)');
-      gradient.addColorStop(1, 'rgba(15, 15, 25, 0.3)');
+      gradient.addColorStop(0, 'rgba(25, 25, 35, 0.4)'); // Reduced opacity
+      gradient.addColorStop(1, 'rgba(15, 15, 25, 0.2)'); // Reduced opacity
       
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -74,9 +74,9 @@ const AnimatedBackground: React.FC = () => {
         }
       });
       
-      // Draw connecting lines with increased connection distance
-      ctx.strokeStyle = 'rgba(155, 135, 245, 0.2)';
-      ctx.lineWidth = 0.4;
+      // Draw connecting lines with reduced opacity for better text visibility
+      ctx.strokeStyle = 'rgba(155, 135, 245, 0.15)';
+      ctx.lineWidth = 0.3;
       
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
@@ -84,7 +84,7 @@ const AnimatedBackground: React.FC = () => {
           const dy = particles[i].y - particles[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
           
-          if (distance < 220) { // Increased connection distance
+          if (distance < 180) { // Reduced connection distance
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -107,7 +107,7 @@ const AnimatedBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full -z-10 opacity-80" // Increased opacity
+      className="fixed top-0 left-0 w-full h-full -z-10 opacity-60" // Reduced opacity for better text visibility
     />
   );
 };
