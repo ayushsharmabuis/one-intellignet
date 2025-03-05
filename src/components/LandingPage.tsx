@@ -3,6 +3,7 @@ import { ArrowDown, ArrowRight, Bot, Star, Zap, ChevronUp, Github, Twitter, Link
 import Navbar from './Navbar';
 import AnimatedBackground from './AnimatedBackground';
 import { useIntersectionObserver } from '../utils/animations';
+import Logo from './Logo';
 
 const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -265,11 +266,11 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
               isLoaded ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
             }`}>
               <div className="relative w-full h-full flex items-center justify-center">
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
                   <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-one-dark border border-one-border flex items-center justify-center mx-auto shadow-glow-sm">
                     <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-one-accent/5 border border-one-accent/20 flex items-center justify-center pulse-element">
                       <div className="w-16 h-16 md:w-16 md:h-16 rounded-full bg-one-accent/10 border border-one-accent/30 flex items-center justify-center">
-                        <div className="w-8 h-8 md:w-8 md:h-8 rounded-full bg-one-accent animate-pulse-glow"></div>
+                        <Logo className="scale-75" />
                       </div>
                     </div>
                   </div>
@@ -282,29 +283,39 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                   <span className="absolute w-3 h-3 bg-[#9b87f5]/80 rounded-full top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-glow-sm"></span>
                 </div>
                 
-                <div className="absolute top-1/4 left-1/4 transform -translate-y-1/2 -translate-x-1/2 floating-element" style={{ animationDelay: '1s' }}>
-                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
-                    <div className="text-xs md:text-sm">Chatbots</div>
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 floating-element" style={{ animationDelay: '0.5s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Chatbot AI</div>
                   </div>
                 </div>
-                <div className="absolute top-1/2 right-1/4 transform -translate-y-1/2 translate-x-1/2 floating-element" style={{ animationDelay: '1.5s' }}>
-                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
-                    <div className="text-xs md:text-sm">Code AI</div>
+                
+                <div className="absolute top-1/4 right-0 transform translate-x-1/2 -translate-y-1/4 floating-element" style={{ animationDelay: '1s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Image AI</div>
                   </div>
                 </div>
-                <div className="absolute bottom-1/4 left-1/2 transform translate-y-1/4 -translate-x-1/2 floating-element" style={{ animationDelay: '2s' }}>
-                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
-                    <div className="text-xs md:text-sm">Design AI</div>
+                
+                <div className="absolute bottom-0 right-1/4 transform translate-y-1/2 translate-x-1/4 floating-element" style={{ animationDelay: '1.5s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Video AI</div>
                   </div>
                 </div>
-                <div className="absolute top-1/2 left-1/6 transform -translate-y-1/2 floating-element" style={{ animationDelay: '2.5s' }}>
-                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
-                    <div className="text-xs md:text-sm">Image AI</div>
+                
+                <div className="absolute bottom-0 left-1/4 transform translate-y-1/2 -translate-x-1/4 floating-element" style={{ animationDelay: '2s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Code AI</div>
                   </div>
                 </div>
-                <div className="absolute bottom-1/4 right-1/6 transform translate-y-1/2 floating-element" style={{ animationDelay: '1.8s' }}>
-                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-24 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
-                    <div className="text-xs md:text-sm">Video AI</div>
+                
+                <div className="absolute top-1/4 left-0 transform -translate-x-1/2 -translate-y-1/4 floating-element" style={{ animationDelay: '2.5s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Design AI</div>
+                  </div>
+                </div>
+                
+                <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 translate-y-1/4 floating-element" style={{ animationDelay: '3s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Text AI</div>
                   </div>
                 </div>
               </div>
@@ -514,7 +525,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20 inline-block mb-6 cta-animated opacity-0">
+            <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
               Get Started Today
             </span>
             
