@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import LandingPage from '../components/LandingPage';
 import Questionnaire from '../components/Questionnaire';
 import Dashboard from '../components/Dashboard';
+import Chatbot from '../components/Chatbot';
 import { usePreferences } from '../hooks/usePreferences';
 
 const Index = () => {
@@ -79,6 +80,8 @@ const Index = () => {
           onResetPreferences={handleResetPreferences}
         />
       )}
+      
+      <Chatbot />
     </>
   );
 };

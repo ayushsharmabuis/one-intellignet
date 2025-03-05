@@ -1,13 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, MessageCircle } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showChatbot, setShowChatbot] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,10 +27,6 @@ const Navbar: React.FC = () => {
     if (heroGetStartedBtn) {
       heroGetStartedBtn.click();
     }
-  };
-
-  const toggleChatbot = () => {
-    setShowChatbot(!showChatbot);
   };
 
   return (
@@ -80,14 +75,8 @@ const Navbar: React.FC = () => {
             </button>
           </div>
 
-          {/* Mobile Menu Toggle and Chatbot Button */}
-          <div className="flex items-center space-x-4 md:space-x-6">
-            <button 
-              className="w-10 h-10 rounded-full bg-one-accent/20 flex items-center justify-center text-white hover:bg-one-accent/40 transition-colors duration-200 shadow-glow-sm"
-              onClick={toggleChatbot}
-            >
-              <MessageCircle size={20} />
-            </button>
+          {/* Mobile Menu Toggle */}
+          <div className="flex items-center">
             <button 
               className="md:hidden z-20 text-one-text-muted hover:text-one-text" 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -144,40 +133,6 @@ const Navbar: React.FC = () => {
           </button>
         </div>
       </div>
-
-      {/* AI Chatbot Button (Fixed Position) */}
-      <button 
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-one-accent text-white flex items-center justify-center hover:bg-one-accent-hover transition-colors duration-300 shadow-glow-md z-50"
-        onClick={toggleChatbot}
-      >
-        <MessageCircle size={24} />
-      </button>
-
-      {/* Chatbot Modal (Simple Implementation) */}
-      {showChatbot && (
-        <div className="fixed bottom-24 right-6 w-80 h-96 bg-one-darker border border-one-border rounded-lg shadow-glow-md p-4 z-50">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-white font-semibold">AI Assistant</h3>
-            <button onClick={toggleChatbot}>
-              <X size={20} className="text-one-text-muted hover:text-white" />
-            </button>
-          </div>
-          <div className="bg-one-dark h-72 rounded-md p-4 overflow-y-auto flex flex-col justify-end">
-            <div className="bg-one-accent/20 p-3 rounded-lg rounded-bl-none mb-2 max-w-[80%] text-sm">
-              Hello! I'm your AI assistant. How can I help you today?
-            </div>
-            <div className="mt-auto">
-              <div className="relative">
-                <input 
-                  type="text" 
-                  placeholder="Type your message..." 
-                  className="w-full bg-one-card border border-one-border rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-one-accent"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </nav>
   );
 };
