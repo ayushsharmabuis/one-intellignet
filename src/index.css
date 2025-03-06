@@ -111,7 +111,7 @@
   }
   
   .hero-gradient {
-    @apply absolute inset-0 bg-hero-glow opacity-80;
+    @apply absolute inset-0 bg-hero-glow opacity-70; /* Reduced from 80 */
   }
   
   .floating-element {
@@ -127,46 +127,37 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  
-  /* New text reveal animation */
-  .text-reveal {
-    @apply relative overflow-hidden inline-block;
+}
+
+/* Additional animation classes to ensure all animations appear properly */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  
-  .text-reveal span {
-    @apply opacity-0 transform translate-y-full inline-block transition-all duration-500;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .text-reveal.active span {
-    @apply opacity-100 transform translate-y-0;
+}
+
+@keyframes slide-in-bottom {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
   }
-  
-  /* Glassmorphism effects */
-  .glass-effect {
-    @apply backdrop-blur-md bg-white/5 border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.1)];
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* New liquid button effect */
-  .liquid-button::before {
-    @apply absolute content-[''] inset-0 bg-gradient-to-r from-one-accent to-[#9b87f5] rounded-lg blur opacity-0 transition-opacity duration-300;
-    z-index: -1;
-  }
-  
-  .liquid-button:hover::before {
-    @apply opacity-100;
-  }
-  
-  /* 3D card effect */
-  .card-3d {
-    @apply transition-transform duration-300 ease-out transform-gpu;
-    transform-style: preserve-3d;
-  }
-  
-  /* Neon glow text */
-  .neon-text {
-    @apply text-one-accent;
-    text-shadow: 0 0 5px rgba(123, 92, 250, 0.5), 0 0 10px rgba(123, 92, 250, 0.3);
-  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s forwards;
+}
+
+.animate-slide-in-bottom {
+  animation: slide-in-bottom 0.8s forwards;
 }
 
 /* Custom Scrollbar */
@@ -211,20 +202,11 @@
   transition: opacity 300ms, transform 300ms;
 }
 
-/* Text animations */
-@keyframes text-reveal {
-  0% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.animate-text-reveal {
-  animation: text-reveal 0.5s forwards;
+/* Ensure all sections are visible */
+section {
+  display: block;
+  position: relative;
+  z-index: 1;
 }
 
 /* Glow pulse */
@@ -241,20 +223,8 @@
   animation: glow-pulse 3s infinite;
 }
 
-/* Liquid effect */
-@keyframes liquid-wave {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-liquid {
-  animation: liquid-wave 8s infinite;
-  background-size: 200% 200%;
+/* Fix for interactive buttons to make sure they're visible */
+.hero-get-started-btn {
+  position: relative;
+  z-index: 5;
 }

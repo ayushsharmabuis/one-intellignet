@@ -127,8 +127,43 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
     });
   }, [isLoaded]);
 
+  useEffect(() => {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(section => {
+      section.style.display = 'block';
+    });
+
+    const valueProps = document.querySelectorAll('.value-prop-item');
+    valueProps.forEach((item, index) => {
+      setTimeout(() => {
+        (item as HTMLElement).style.opacity = '1';
+        (item as HTMLElement).style.transform = 'translateY(0)';
+      }, index * 100);
+    });
+
+    const pricingCards = document.querySelectorAll('.pricing-card');
+    pricingCards.forEach((card, index) => {
+      setTimeout(() => {
+        (card as HTMLElement).style.opacity = '1';
+        (card as HTMLElement).style.transform = 'translateY(0)';
+      }, index * 100);
+    });
+
+    const reviewCards = document.querySelectorAll('.review-card');
+    reviewCards.forEach((card) => {
+      (card as HTMLElement).style.opacity = '1';
+    });
+
+    const ctaElements = document.querySelectorAll('.cta-animated');
+    ctaElements.forEach((el, index) => {
+      setTimeout(() => {
+        (el as HTMLElement).style.opacity = '1';
+      }, index * 100 + 300);
+    });
+  }, [isLoaded]);
+
   return (
-    <div className="min-h-screen bg-one-dark overflow-hidden">
+    <div className="min-h-screen bg-one-dark overflow-x-hidden">
       <AnimatedBackground />
       <Navbar />
 
@@ -212,7 +247,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="features" className="section-container py-40 relative">
+      <section id="features" className="section-container py-32 relative">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
@@ -234,7 +269,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
           {features.map((item, index) => (
             <div 
               key={index} 
-              className="value-prop-item flex gap-6 opacity-0 transition-all duration-500 glass-card p-6 rounded-xl hover:shadow-glow-sm"
+              className="value-prop-item flex gap-6 opacity-0 transition-all duration-500 glass-card p-6 rounded-xl hover:shadow-glow-sm transform translate-y-4"
               style={{transitionDelay: `${index * 0.1}s`}}
             >
               <div className="flex-shrink-0">
@@ -251,7 +286,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="pricing" className="section-container py-40 bg-one-darker relative overflow-hidden">
+      <section id="pricing" className="section-container py-32 bg-one-darker relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
@@ -345,7 +380,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="reviews" className="section-container py-40 relative">
+      <section id="reviews" className="section-container py-32 relative">
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
           <div className="absolute top-0 right-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
           <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
@@ -409,7 +444,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="cta" className="py-40 relative overflow-hidden mt-24">
+      <section id="cta" className="py-32 relative overflow-hidden mt-20">
         <div className="absolute inset-0 bg-gradient-to-b from-one-dark to-one-darker opacity-80"></div>
         <div className="absolute inset-0 opacity-40">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/lovable-uploads/9092faf0-1f11-4eb6-b372-f68ccf274d6e.png')] bg-cover bg-center"></div>
