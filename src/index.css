@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -56,6 +55,7 @@
   body {
     @apply bg-one-dark text-one-text antialiased overflow-x-hidden;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    position: relative;
   }
 
   html {
@@ -206,13 +206,13 @@
 section {
   display: block;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* Ensure hero section content appears above animation */
 .hero-section {
   position: relative;
-  z-index: 1;
+  z-index: 3;
 }
 
 .hero-section .container {
@@ -220,18 +220,11 @@ section {
   z-index: 5;
 }
 
-/* Glow pulse */
-@keyframes glow-pulse {
-  0%, 100% {
-    box-shadow: 0 0 10px 2px rgba(123, 92, 250, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px 5px rgba(123, 92, 250, 0.8);
-  }
-}
-
-.animate-glow-pulse {
-  animation: glow-pulse 3s infinite;
+/* Fix for canvas animation to be visible */
+canvas.animated-background {
+  z-index: 0 !important;
+  pointer-events: auto !important;
+  opacity: 1 !important;
 }
 
 /* Fix for interactive buttons to make sure they're visible */

@@ -4,6 +4,7 @@ import LandingPage from '../components/LandingPage';
 import Questionnaire from '../components/Questionnaire';
 import Dashboard from '../components/Dashboard';
 import Chatbot from '../components/Chatbot';
+import AnimatedBackground from '../components/AnimatedBackground';
 import { usePreferences } from '../hooks/usePreferences';
 
 const Index = () => {
@@ -61,6 +62,8 @@ const Index = () => {
 
   return (
     <>
+      <AnimatedBackground />
+      
       {currentView === 'landing' && (
         <LandingPage onGetStarted={handleGetStarted} />
       )}

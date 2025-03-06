@@ -13,14 +13,14 @@ const AnimatedBackground: React.FC = () => {
     
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 1.2; // Reduced height factor
+      canvas.height = window.innerHeight;
     };
     
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     
     const particles: Particle[] = [];
-    const particleCount = 30; // Reduced particle count for better performance
+    const particleCount = 30;
     
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -44,7 +44,7 @@ const AnimatedBackground: React.FC = () => {
       { name: "Writing AI", angle: 5 * Math.PI / 3, color: "rgba(155, 245, 235, 0.9)" }
     ];
     
-    const getOrbitRadius = () => Math.min(canvas.width, canvas.height) * 0.2; // Increased orbit radius
+    const getOrbitRadius = () => Math.min(canvas.width, canvas.height) * 0.25;
     const getCenterX = () => canvas.width / 2;
     const getCenterY = () => canvas.height / 3;
     
@@ -68,7 +68,7 @@ const AnimatedBackground: React.FC = () => {
         const y = centerY + Math.sin(tool.angle + time * 0.1) * orbitRadius;
         
         const distance = Math.sqrt(Math.pow(mouseX - x, 2) + Math.pow(mouseY - y, 2));
-        if (distance < 35) { // Increased hitbox size
+        if (distance < 35) {
           hoveredTool = index;
         }
       });
@@ -116,7 +116,7 @@ const AnimatedBackground: React.FC = () => {
       
       // Draw the central logo
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 50, 0, Math.PI * 2); // Increased logo size
+      ctx.arc(centerX, centerY, 50, 0, Math.PI * 2);
       const logoGradient = ctx.createRadialGradient(
         centerX, centerY, 0,
         centerX, centerY, 50
@@ -163,7 +163,7 @@ const AnimatedBackground: React.FC = () => {
         const y = centerY + Math.sin(tool.angle + time * 0.1) * orbitRadius;
         
         const isHovered = hoveredTool === index;
-        const nodeSize = isHovered ? 32 : 28; // Increased node size
+        const nodeSize = isHovered ? 32 : 28;
         
         // Draw glow effect for hovered nodes
         if (isHovered) {
@@ -209,11 +209,11 @@ const AnimatedBackground: React.FC = () => {
         lineGradient.addColorStop(1, tool.color.replace('0.9', '0.7'));
         
         ctx.strokeStyle = lineGradient;
-        ctx.lineWidth = isHovered ? 3 : 2; // Increased line width
+        ctx.lineWidth = isHovered ? 3 : 2;
         ctx.stroke();
         
         // Draw node label with text shadow for better visibility
-        ctx.font = isHovered ? 'bold 16px Inter' : 'bold 14px Inter'; // Increased font size
+        ctx.font = isHovered ? 'bold 16px Inter' : 'bold 14px Inter';
         ctx.fillStyle = '#FFFFFF';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
@@ -229,15 +229,15 @@ const AnimatedBackground: React.FC = () => {
         ctx.shadowOffsetY = 0;
         
         // Add orbiting particles around each node
-        const miniParticleCount = isHovered ? 6 : 3; // Increased particle count
-        const miniOrbitRadius = isHovered ? 40 : 32; // Increased orbit radius
+        const miniParticleCount = isHovered ? 6 : 3;
+        const miniOrbitRadius = isHovered ? 40 : 32;
         for (let i = 0; i < miniParticleCount; i++) {
           const miniAngle = (i * (2 * Math.PI / miniParticleCount)) + time * (isHovered ? 3 : 2);
           const miniX = x + Math.cos(miniAngle) * miniOrbitRadius;
           const miniY = y + Math.sin(miniAngle) * miniOrbitRadius;
           
           ctx.beginPath();
-          ctx.arc(miniX, miniY, isHovered ? 3.5 : 2.5, 0, Math.PI * 2); // Increased particle size
+          ctx.arc(miniX, miniY, isHovered ? 3.5 : 2.5, 0, Math.PI * 2);
           ctx.fillStyle = isHovered ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.8)';
           ctx.fill();
         }
@@ -295,7 +295,12 @@ const AnimatedBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full -z-10 opacity-80"
+      className="fixed top-0 left-0 w-full h-full -z-10"
+      style={{ 
+        opacity: 1, 
+        pointerEvents: 'auto',
+        zIndex: 0
+      }}
     />
   );
 };
