@@ -65,7 +65,7 @@
 
 @layer components {
   .glass-card {
-    @apply bg-one-card backdrop-blur-md border border-one-border/50 shadow-card;
+    @apply bg-one-card/70 backdrop-blur-md border border-one-border/50 shadow-card;
   }
   
   .glow-effect {
@@ -122,6 +122,12 @@
     @apply animate-pulse-glow;
   }
   
+  /* Text Gradient */
+  .text-gradient {
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
   /* New text reveal animation */
   .text-reveal {
     @apply relative overflow-hidden inline-block;
@@ -133,6 +139,11 @@
   
   .text-reveal.active span {
     @apply opacity-100 transform translate-y-0;
+  }
+  
+  /* Glassmorphism effects */
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/5 border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.1)];
   }
   
   /* New liquid button effect */
