@@ -260,3 +260,20 @@ canvas.animated-background {
 .animate-pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
 }
+
+/* Additional styles for the animated canvas elements */
+.animated-node {
+  transition: all 0.3s ease;
+}
+
+.animated-node:hover {
+  filter: brightness(1.2);
+  transform: scale(1.1);
+}
+
+/* Ensure the animation is visible */
+canvas {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}

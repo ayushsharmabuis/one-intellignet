@@ -25,7 +25,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
   };
 
   useEffect(() => {
-    const heroText = "Streamline Your Workflow With One-Intelligent";
+    const heroText = "Now Access All AI Tools In One Place";
     const animationDelay = 40; // ms between each character
 
     const animateText = async () => {
@@ -69,10 +69,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoaded(true);
-    }, 200);
-
     const testimonialInterval = setInterval(() => {
       setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
@@ -171,6 +167,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         <div className="hero-gradient absolute inset-0 bg-hero-glow opacity-80"></div>
         <div className="container mx-auto z-10 mt-12 hero-elements pl-4 lg:pl-16">
           <div className="flex flex-col lg:flex-row items-center">
+            <div className="lg:w-1/2"></div>
             <div className={`lg:w-1/2 transition-all duration-1000 transform ${
               isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
@@ -197,7 +194,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                   ))}
                 </span>
                 <span className="text-one-accent block transform-gpu animate-slide-in-bottom" style={{ animationDelay: '1.5s', opacity: 0, animationFillMode: 'forwards' }}>
-                  All Your AI tools & needs
+                  One Intelligent Platform
                 </span>
               </h1>
               
@@ -235,8 +232,6 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                 </button>
               </div>
             </div>
-
-            <div className="lg:w-1/2"></div>
           </div>
         </div>
         

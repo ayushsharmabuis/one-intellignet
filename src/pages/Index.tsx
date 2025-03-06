@@ -61,7 +61,7 @@ const Index = () => {
   };
 
   return (
-    <>
+    <div className="relative overflow-hidden w-full h-full">
       <AnimatedBackground />
       
       {currentView === 'landing' && (
@@ -85,7 +85,7 @@ const Index = () => {
       )}
       
       <Chatbot />
-    </>
+    </div>
   );
 };
 

@@ -44,9 +44,10 @@ const AnimatedBackground: React.FC = () => {
       { name: "Writing AI", angle: 5 * Math.PI / 3, color: "rgba(155, 245, 235, 0.9)" }
     ];
     
-    const getOrbitRadius = () => Math.min(canvas.width, canvas.height) * 0.25;
-    const getCenterX = () => canvas.width / 2;
-    const getCenterY = () => canvas.height / 3;
+    // Position the animation on the left side
+    const getOrbitRadius = () => Math.min(canvas.width, canvas.height) * 0.2;
+    const getCenterX = () => canvas.width * 0.25; // Move to left side
+    const getCenterY = () => canvas.height * 0.4; // Center vertically
     
     let animationFrameId: number;
     let time = 0;
@@ -83,10 +84,10 @@ const AnimatedBackground: React.FC = () => {
       const centerX = getCenterX();
       const centerY = getCenterY();
       
-      // Draw a subtle radial gradient background
+      // Draw a subtle radial gradient background for the animation area
       const gradient = ctx.createRadialGradient(
         centerX, centerY, 0,
-        centerX, centerY, canvas.width * 0.5
+        centerX, centerY, canvas.width * 0.4
       );
       
       gradient.addColorStop(0, 'rgba(25, 25, 35, 0.3)');
@@ -139,9 +140,10 @@ const AnimatedBackground: React.FC = () => {
       ctx.textBaseline = 'middle';
       ctx.fillText('1', centerX, centerY);
       
+      // Draw "One-Intelligent" text
       ctx.font = 'bold 16px Inter';
       ctx.fillStyle = '#FFFFFF';
-      ctx.fillText('ONE INTELLIGENT', centerX, centerY + 65);
+      ctx.fillText('ONE-INTELLIGENT', centerX, centerY + 65);
       
       // Draw a pulsing ring around the logo
       const pulseSize = 2 + Math.sin(time * 2) * 1.5;
@@ -212,21 +214,25 @@ const AnimatedBackground: React.FC = () => {
         ctx.lineWidth = isHovered ? 3 : 2;
         ctx.stroke();
         
-        // Draw node label with text shadow for better visibility
-        ctx.font = isHovered ? 'bold 16px Inter' : 'bold 14px Inter';
-        ctx.fillStyle = '#FFFFFF';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
+        // Improve text visibility with shadow and background
+        ctx.save();
+        // Add semi-transparent background for better text readability
+        const textWidth = ctx.measureText(tool.name).width;
+        ctx.fillStyle = 'rgba(15, 15, 25, 0.7)';
+        ctx.fillRect(x - textWidth/2 - 5, y - 10, textWidth + 10, 20);
         
         // Add text shadow for better readability
         ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
         ctx.shadowBlur = 5;
         ctx.shadowOffsetX = 1;
         ctx.shadowOffsetY = 1;
+        
+        ctx.font = isHovered ? 'bold 16px Inter' : 'bold 14px Inter';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
         ctx.fillText(tool.name, x, y);
-        ctx.shadowBlur = 0;
-        ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 0;
+        ctx.restore();
         
         // Add orbiting particles around each node
         const miniParticleCount = isHovered ? 6 : 3;
@@ -299,7 +305,7 @@ const AnimatedBackground: React.FC = () => {
       style={{ 
         opacity: 1, 
         pointerEvents: 'auto',
-        zIndex: 0
+        zIndex: 1
       }}
     />
   );
