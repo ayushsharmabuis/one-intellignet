@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 
 const AnimatedBackground: React.FC = () => {
@@ -12,14 +13,14 @@ const AnimatedBackground: React.FC = () => {
     
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight * 1.5;
+      canvas.height = window.innerHeight * 1.2; // Reduced height factor
     };
     
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     
     const particles: Particle[] = [];
-    const particleCount = 40;
+    const particleCount = 30; // Reduced particle count for better performance
     
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -43,7 +44,7 @@ const AnimatedBackground: React.FC = () => {
       { name: "Writing AI", angle: 5 * Math.PI / 3, color: "rgba(155, 245, 235, 0.9)" }
     ];
     
-    const getOrbitRadius = () => Math.min(canvas.width, canvas.height) * 0.15;
+    const getOrbitRadius = () => Math.min(canvas.width, canvas.height) * 0.2; // Increased orbit radius
     const getCenterX = () => canvas.width / 2;
     const getCenterY = () => canvas.height / 3;
     
@@ -67,7 +68,7 @@ const AnimatedBackground: React.FC = () => {
         const y = centerY + Math.sin(tool.angle + time * 0.1) * orbitRadius;
         
         const distance = Math.sqrt(Math.pow(mouseX - x, 2) + Math.pow(mouseY - y, 2));
-        if (distance < 30) {
+        if (distance < 35) { // Increased hitbox size
           hoveredTool = index;
         }
       });
@@ -82,13 +83,10 @@ const AnimatedBackground: React.FC = () => {
       const centerX = getCenterX();
       const centerY = getCenterY();
       
+      // Draw a subtle radial gradient background
       const gradient = ctx.createRadialGradient(
-        centerX,
-        centerY,
-        0,
-        centerX,
-        centerY,
-        canvas.width * 0.5
+        centerX, centerY, 0,
+        centerX, centerY, canvas.width * 0.5
       );
       
       gradient.addColorStop(0, 'rgba(25, 25, 35, 0.3)');
@@ -97,24 +95,7 @@ const AnimatedBackground: React.FC = () => {
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      particles.forEach((particle) => {
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = particle.color;
-        ctx.fill();
-        
-        particle.x += particle.velocity.x;
-        particle.y += particle.velocity.y;
-        
-        if (particle.x < 0 || particle.x > canvas.width) {
-          particle.velocity.x *= -1;
-        }
-        
-        if (particle.y < 0 || particle.y > canvas.height) {
-          particle.velocity.y *= -1;
-        }
-      });
-      
+      // Draw particle connections
       ctx.strokeStyle = 'rgba(155, 135, 245, 0.08)';
       ctx.lineWidth = 0.2;
       
@@ -133,56 +114,66 @@ const AnimatedBackground: React.FC = () => {
         }
       }
       
+      // Draw the central logo
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 40, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, 50, 0, Math.PI * 2); // Increased logo size
       const logoGradient = ctx.createRadialGradient(
-        centerX,
-        centerY,
-        0,
-        centerX,
-        centerY,
-        40
+        centerX, centerY, 0,
+        centerX, centerY, 50
       );
       logoGradient.addColorStop(0, 'rgba(123, 92, 250, 0.95)');
       logoGradient.addColorStop(1, 'rgba(155, 135, 245, 0.85)');
       ctx.fillStyle = logoGradient;
       ctx.fill();
       
+      // Draw a highlight on the logo
       ctx.beginPath();
-      ctx.arc(centerX - 10, centerY - 10, 12, 0, Math.PI * 2);
+      ctx.arc(centerX - 12, centerY - 12, 15, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
       ctx.fill();
       
-      ctx.font = 'bold 32px Inter';
+      // Draw the logo text
+      ctx.font = 'bold 38px Inter';
       ctx.fillStyle = '#FFFFFF';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText('1', centerX, centerY);
       
-      ctx.font = 'bold 14px Inter';
+      ctx.font = 'bold 16px Inter';
       ctx.fillStyle = '#FFFFFF';
-      ctx.fillText('ONE INTELLIGENT', centerX, centerY + 55);
+      ctx.fillText('ONE INTELLIGENT', centerX, centerY + 65);
       
+      // Draw a pulsing ring around the logo
       const pulseSize = 2 + Math.sin(time * 2) * 1.5;
       ctx.beginPath();
-      ctx.arc(centerX, centerY, 46 + pulseSize, 0, Math.PI * 2);
+      ctx.arc(centerX, centerY, 56 + pulseSize, 0, Math.PI * 2);
       ctx.strokeStyle = 'rgba(155, 135, 245, 0.5)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, 62 + pulseSize * 1.5, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(155, 135, 245, 0.2)';
       ctx.lineWidth = 1.5;
       ctx.stroke();
       
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, 50 + pulseSize * 1.5, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(155, 135, 245, 0.2)';
-      ctx.lineWidth = 1;
-      ctx.stroke();
-      
+      // Draw AI tool nodes
       aiTools.forEach((tool, index) => {
         const x = centerX + Math.cos(tool.angle + time * 0.1) * orbitRadius;
         const y = centerY + Math.sin(tool.angle + time * 0.1) * orbitRadius;
         
         const isHovered = hoveredTool === index;
-        const nodeSize = isHovered ? 28 : 24;
+        const nodeSize = isHovered ? 32 : 28; // Increased node size
         
+        // Draw glow effect for hovered nodes
+        if (isHovered) {
+          ctx.beginPath();
+          ctx.arc(x, y, nodeSize + 8, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(155, 135, 245, 0.3)';
+          ctx.fill();
+        }
+        
+        // Draw node
         ctx.beginPath();
         ctx.arc(x, y, nodeSize, 0, Math.PI * 2);
         
@@ -194,26 +185,21 @@ const AnimatedBackground: React.FC = () => {
         if (isHovered) {
           nodeGradient.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
           nodeGradient.addColorStop(1, tool.color);
-          
-          ctx.beginPath();
-          ctx.arc(x, y, nodeSize + 4, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(155, 135, 245, 0.3)';
-          ctx.fill();
         } else {
           nodeGradient.addColorStop(0, 'rgba(255, 255, 255, 0.7)');
           nodeGradient.addColorStop(1, tool.color);
         }
         
-        ctx.beginPath();
-        ctx.arc(x, y, nodeSize, 0, Math.PI * 2);
         ctx.fillStyle = nodeGradient;
         ctx.fill();
         
+        // Draw highlight on node
         ctx.beginPath();
         ctx.arc(x - nodeSize/3, y - nodeSize/3, nodeSize/3, 0, Math.PI * 2);
         ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
         ctx.fill();
         
+        // Draw connection to center
         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
         ctx.lineTo(x, y);
@@ -223,54 +209,76 @@ const AnimatedBackground: React.FC = () => {
         lineGradient.addColorStop(1, tool.color.replace('0.9', '0.7'));
         
         ctx.strokeStyle = lineGradient;
-        ctx.lineWidth = isHovered ? 2 : 1.5;
+        ctx.lineWidth = isHovered ? 3 : 2; // Increased line width
         ctx.stroke();
         
-        ctx.font = isHovered ? 'bold 14px Inter' : 'bold 12px Inter';
+        // Draw node label with text shadow for better visibility
+        ctx.font = isHovered ? 'bold 16px Inter' : 'bold 14px Inter'; // Increased font size
         ctx.fillStyle = '#FFFFFF';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         
+        // Add text shadow for better readability
         ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
-        ctx.shadowBlur = 3;
+        ctx.shadowBlur = 5;
+        ctx.shadowOffsetX = 1;
+        ctx.shadowOffsetY = 1;
         ctx.fillText(tool.name, x, y);
         ctx.shadowBlur = 0;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
         
-        const miniParticleCount = isHovered ? 4 : 2;
-        const miniOrbitRadius = isHovered ? 30 : 25;
+        // Add orbiting particles around each node
+        const miniParticleCount = isHovered ? 6 : 3; // Increased particle count
+        const miniOrbitRadius = isHovered ? 40 : 32; // Increased orbit radius
         for (let i = 0; i < miniParticleCount; i++) {
-          const miniAngle = tool.angle + (i * (2 * Math.PI / miniParticleCount)) + time * (isHovered ? 3 : 2);
+          const miniAngle = (i * (2 * Math.PI / miniParticleCount)) + time * (isHovered ? 3 : 2);
           const miniX = x + Math.cos(miniAngle) * miniOrbitRadius;
           const miniY = y + Math.sin(miniAngle) * miniOrbitRadius;
           
           ctx.beginPath();
-          ctx.arc(miniX, miniY, isHovered ? 3 : 2, 0, Math.PI * 2);
+          ctx.arc(miniX, miniY, isHovered ? 3.5 : 2.5, 0, Math.PI * 2); // Increased particle size
           ctx.fillStyle = isHovered ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.8)';
           ctx.fill();
         }
+        
+        // Create particles flowing from nodes to center
+        if (Math.random() < (isHovered ? 0.2 : 0.05)) {
+          particles.push({
+            x: x,
+            y: y,
+            radius: isHovered ? 2.5 : 2,
+            color: tool.color,
+            velocity: {
+              x: (centerX - x) * 0.01,
+              y: (centerY - y) * 0.01
+            }
+          });
+          
+          if (particles.length > particleCount + 15) {
+            particles.splice(0, 1);
+          }
+        }
       });
       
-      if (Math.random() < 0.03) {
-        const sourceIndex = Math.floor(Math.random() * aiTools.length);
-        const sourceAngle = aiTools[sourceIndex].angle + time * 0.1;
-        const sourceX = centerX + Math.cos(sourceAngle) * orbitRadius;
-        const sourceY = centerY + Math.sin(sourceAngle) * orbitRadius;
+      // Draw and update particles
+      particles.forEach((particle) => {
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        ctx.fillStyle = particle.color;
+        ctx.fill();
         
-        particles.push({
-          x: sourceX,
-          y: sourceY,
-          radius: 2,
-          color: aiTools[sourceIndex].color,
-          velocity: {
-            x: (centerX - sourceX) * 0.01,
-            y: (centerY - sourceY) * 0.01
-          }
-        });
+        particle.x += particle.velocity.x;
+        particle.y += particle.velocity.y;
         
-        if (particles.length > particleCount + 8) {
-          particles.splice(Math.floor(Math.random() * particles.length), 1);
+        if (particle.x < 0 || particle.x > canvas.width) {
+          particle.velocity.x *= -1;
         }
-      }
+        
+        if (particle.y < 0 || particle.y > canvas.height) {
+          particle.velocity.y *= -1;
+        }
+      });
       
       time += 0.01;
       animationFrameId = requestAnimationFrame(animate);
@@ -287,7 +295,7 @@ const AnimatedBackground: React.FC = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 w-full h-full -z-10 opacity-70"
+      className="fixed top-0 left-0 w-full h-full -z-10 opacity-80"
     />
   );
 };
