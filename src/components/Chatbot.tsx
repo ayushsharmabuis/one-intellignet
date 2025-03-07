@@ -83,7 +83,7 @@ const Chatbot: React.FC = () => {
 
   return (
     <>
-      {/* Chatbot Toggle Button */}
+      {/* Chatbot Toggle Button - Moved to right side */}
       <button 
         className="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-one-accent text-white flex items-center justify-center hover:bg-one-accent-hover transition-colors duration-300 shadow-glow-md z-50"
         onClick={toggleChatbot}
