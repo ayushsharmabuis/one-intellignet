@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -55,7 +56,6 @@
   body {
     @apply bg-one-dark text-one-text antialiased overflow-x-hidden;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
-    position: relative;
   }
 
   html {
@@ -111,7 +111,7 @@
   }
   
   .hero-gradient {
-    @apply absolute inset-0 bg-hero-glow opacity-70;
+    @apply absolute inset-0 bg-hero-glow opacity-80;
   }
   
   .floating-element {
@@ -127,37 +127,46 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-}
-
-/* Additional animation classes to ensure all animations appear properly */
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
+  
+  /* New text reveal animation */
+  .text-reveal {
+    @apply relative overflow-hidden inline-block;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .text-reveal span {
+    @apply opacity-0 transform translate-y-full inline-block transition-all duration-500;
   }
-}
-
-@keyframes slide-in-bottom {
-  0% {
-    opacity: 0;
-    transform: translateY(15px);
+  
+  .text-reveal.active span {
+    @apply opacity-100 transform translate-y-0;
   }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+  
+  /* Glassmorphism effects */
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/5 border border-white/10 shadow-[0_4px_12px_rgba(0,0,0,0.1)];
   }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.5s forwards;
-}
-
-.animate-slide-in-bottom {
-  animation: slide-in-bottom 0.8s forwards;
+  
+  /* New liquid button effect */
+  .liquid-button::before {
+    @apply absolute content-[''] inset-0 bg-gradient-to-r from-one-accent to-[#9b87f5] rounded-lg blur opacity-0 transition-opacity duration-300;
+    z-index: -1;
+  }
+  
+  .liquid-button:hover::before {
+    @apply opacity-100;
+  }
+  
+  /* 3D card effect */
+  .card-3d {
+    @apply transition-transform duration-300 ease-out transform-gpu;
+    transform-style: preserve-3d;
+  }
+  
+  /* Neon glow text */
+  .neon-text {
+    @apply text-one-accent;
+    text-shadow: 0 0 5px rgba(123, 92, 250, 0.5), 0 0 10px rgba(123, 92, 250, 0.3);
+  }
 }
 
 /* Custom Scrollbar */
@@ -202,78 +211,50 @@
   transition: opacity 300ms, transform 300ms;
 }
 
-/* Make sure all sections have proper z-index and visibility */
-section {
-  display: block;
-  position: relative;
-  z-index: 2;
-}
-
-/* Ensure hero section content appears above animation */
-.hero-section {
-  position: relative;
-  z-index: 3;
-}
-
-.hero-section .container {
-  position: relative;
-  z-index: 5;
-}
-
-/* Fix for canvas animation to be visible */
-canvas.animated-background {
-  z-index: 0 !important;
-  pointer-events: auto !important;
-  opacity: 1 !important;
-}
-
-/* Fix for interactive buttons to make sure they're visible */
-.hero-get-started-btn {
-  position: relative;
-  z-index: 5;
-}
-
-/* Animation for floating AI tool nodes */
-@keyframes float {
-  0%, 100% {
+/* Text animations */
+@keyframes text-reveal {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
     transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-float {
-  animation: float 5s ease-in-out infinite;
-}
-
-/* Animation for pulsing glow effect */
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.7;
-  }
-  50% {
     opacity: 1;
   }
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
+.animate-text-reveal {
+  animation: text-reveal 0.5s forwards;
 }
 
-/* Additional styles for the animated canvas elements */
-.animated-node {
-  transition: all 0.3s ease;
+/* Glow pulse */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px 2px rgba(123, 92, 250, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px 5px rgba(123, 92, 250, 0.8);
+  }
 }
 
-.animated-node:hover {
-  filter: brightness(1.2);
-  transform: scale(1.1);
+.animate-glow-pulse {
+  animation: glow-pulse 3s infinite;
 }
 
-/* Ensure the animation is visible */
-canvas {
-  display: block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
+/* Liquid effect */
+@keyframes liquid-wave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-liquid {
+  animation: liquid-wave 8s infinite;
+  background-size: 200% 200%;
 }

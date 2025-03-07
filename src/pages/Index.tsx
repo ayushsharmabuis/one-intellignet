@@ -4,7 +4,6 @@ import LandingPage from '../components/LandingPage';
 import Questionnaire from '../components/Questionnaire';
 import Dashboard from '../components/Dashboard';
 import Chatbot from '../components/Chatbot';
-import AnimatedBackground from '../components/AnimatedBackground';
 import { usePreferences } from '../hooks/usePreferences';
 
 const Index = () => {
@@ -61,9 +60,7 @@ const Index = () => {
   };
 
   return (
-    <div className="relative overflow-hidden w-full h-full">
-      <AnimatedBackground />
-      
+    <>
       {currentView === 'landing' && (
         <LandingPage onGetStarted={handleGetStarted} />
       )}
@@ -85,7 +82,7 @@ const Index = () => {
       )}
       
       <Chatbot />
-    </div>
+    </>
   );
 };
 
