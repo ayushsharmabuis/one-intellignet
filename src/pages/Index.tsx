@@ -4,10 +4,12 @@ import LandingPage from '../components/LandingPage';
 import Questionnaire from '../components/Questionnaire';
 import Dashboard from '../components/Dashboard';
 import Chatbot from '../components/Chatbot';
+import SignupPage from '../components/SignupPage';
 import { usePreferences } from '../hooks/usePreferences';
+import { useToast } from '@/components/ui/use-toast';
 
 const Index = () => {
-  const [currentView, setCurrentView] = useState<'landing' | 'questionnaire' | 'dashboard'>('landing');
+  const [currentView, setCurrentView] = useState<'landing' | 'signup' | 'questionnaire' | 'dashboard'>('landing');
   const { 
     preferences, 
     updateInterests, 
@@ -16,6 +18,7 @@ const Index = () => {
     completeQuestionnaire,
     resetPreferences 
   } = usePreferences();
+  const { toast } = useToast();
 
   // If user has already completed the questionnaire, show the dashboard
   React.useEffect(() => {
@@ -25,12 +28,29 @@ const Index = () => {
   }, [preferences.completedQuestionnaire]);
 
   const handleGetStarted = () => {
-    console.log("Get Started clicked, navigating to questionnaire");
-    setCurrentView('questionnaire');
+    console.log("Get Started clicked, navigating to signup");
+    setCurrentView('signup');
   };
 
   const handleBackToLanding = () => {
     setCurrentView('landing');
+  };
+
+  const handleSignup = () => {
+    console.log("Signup completed, navigating to questionnaire");
+    setCurrentView('questionnaire');
+  };
+
+  const handleGoogleSignup = () => {
+    console.log("Google signup initiated");
+    toast({
+      title: "Google Authentication",
+      description: "Successfully signed in with Google!",
+    });
+    // Simulate successful Google authentication
+    setTimeout(() => {
+      setCurrentView('questionnaire');
+    }, 1000);
   };
 
   const handleCompleteQuestionnaire = () => {
@@ -63,6 +83,14 @@ const Index = () => {
     <>
       {currentView === 'landing' && (
         <LandingPage onGetStarted={handleGetStarted} />
+      )}
+      
+      {currentView === 'signup' && (
+        <SignupPage 
+          onBack={handleBackToLanding}
+          onSignup={handleSignup}
+          onGoogleSignup={handleGoogleSignup}
+        />
       )}
       
       {currentView === 'questionnaire' && (
