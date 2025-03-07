@@ -3,6 +3,7 @@ import { ArrowDown, ArrowRight, Bot, Star, Zap, ChevronUp, Github, Twitter, Link
 import Navbar from './Navbar';
 import AnimatedBackground from './AnimatedBackground';
 import { useIntersectionObserver } from '../utils/animations';
+import Logo from './Logo';
 
 const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -25,7 +26,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
   };
 
   useEffect(() => {
-    const heroText = "Streamline Your Workflow With One-Intelligent";
+    const heroText = "Now Easy Your Workflow With One-Intelligent";
     const animationDelay = 40; // ms between each character
 
     const animateText = async () => {
@@ -79,6 +80,66 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
 
     return () => clearInterval(testimonialInterval);
   }, []);
+
+  const setValuePropSectionRef = useIntersectionObserver(
+    (entry) => {
+      if (entry.isIntersecting) {
+        const elements = document.querySelectorAll('.value-prop-item');
+        elements.forEach((el, i) => {
+          setTimeout(() => {
+            el.classList.add('animate-slide-in-bottom');
+            el.classList.remove('opacity-0');
+          }, i * 200);
+        });
+      }
+    },
+    { threshold: 0.2 }
+  );
+
+  const setPricingSectionRef = useIntersectionObserver(
+    (entry) => {
+      if (entry.isIntersecting) {
+        const elements = document.querySelectorAll('.pricing-card');
+        elements.forEach((el, i) => {
+          setTimeout(() => {
+            el.classList.add('animate-zoom-in');
+            el.classList.remove('opacity-0');
+          }, i * 200);
+        });
+      }
+    },
+    { threshold: 0.2 }
+  );
+
+  const setReviewsSectionRef = useIntersectionObserver(
+    (entry) => {
+      if (entry.isIntersecting) {
+        const elements = document.querySelectorAll('.review-card');
+        elements.forEach((el, i) => {
+          setTimeout(() => {
+            el.classList.add('animate-fade-in');
+            el.classList.remove('opacity-0');
+          }, i * 150);
+        });
+      }
+    },
+    { threshold: 0.2 }
+  );
+
+  const setCtaSectionRef = useIntersectionObserver(
+    (entry) => {
+      if (entry.isIntersecting) {
+        const elements = document.querySelectorAll('.cta-animated');
+        elements.forEach((el, i) => {
+          setTimeout(() => {
+            el.classList.add('animate-fade-in');
+            el.classList.remove('opacity-0');
+          }, i * 150);
+        });
+      }
+    },
+    { threshold: 0.2 }
+  );
 
   useEffect(() => {
     const buttons = document.querySelectorAll('.interactive-button');
@@ -140,12 +201,12 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
               isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}>
               <div className="inline-block mb-4">
-                <span className="px-3 py-1 rounded-full bg-one-accent/20 text-one-accent text-sm font-medium border border-one-accent/30 animate-pulse-glow backdrop-blur-sm">
+                <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20 animate-pulse-glow">
                   ALL AI ONE PLATFORM
                 </span>
               </div>
               
-              <h1 ref={heroTextRef} className="text-4xl md:text-5xl font-bold mb-6 tracking-tight leading-tight overflow-hidden">
+              <h1 ref={heroTextRef} className="text-3xl md:text-4xl font-bold mb-6 tracking-tight leading-tight overflow-hidden">
                 <span className="block mb-2 relative">
                   {animatedText.map((char, index) => (
                     <span 
@@ -162,7 +223,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                   ))}
                 </span>
                 <span className="text-one-accent block transform-gpu animate-slide-in-bottom" style={{ animationDelay: '1.5s', opacity: 0, animationFillMode: 'forwards' }}>
-                  All Your AI tools & needs
+                  AI tools & needs
                 </span>
               </h1>
               
@@ -174,13 +235,13 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
               <div className="flex flex-col sm:flex-row justify-start gap-4 mb-16 transform-gpu animate-slide-in-bottom" style={{ animationDelay: '2s', opacity: 0, animationFillMode: 'forwards' }}>
                 <button 
                   onClick={onGetStarted}
-                  className="interactive-button text-lg relative overflow-hidden group/button hero-get-started-btn shadow-glow-md hover:shadow-glow-lg"
+                  className="interactive-button text-lg relative overflow-hidden group/button hero-get-started-btn"
                 >
                   <span className="relative z-10 flex items-center">
                     Get Started
                     <ArrowRight className="ml-2 inline-block transition-transform duration-300 group-hover/button:translate-x-1" size={18} />
                   </span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-[#7B5CFA] to-[#9B87F5] transition-all duration-300 group-hover/button:opacity-80"></span>
+                  <span className="absolute inset-0 bg-one-accent transition-all duration-300 group-hover/button:opacity-80"></span>
                   <span className="absolute inset-0 opacity-0 group-hover/button:opacity-100 transition-opacity duration-300">
                     <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#9b87f5] via-[#7B5CFA] to-[#8F74FF] animate-pulse-glow"></span>
                   </span>
@@ -189,8 +250,8 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                 <button 
                   onClick={scrollToPricing}
                   className="px-6 py-3 rounded-lg font-medium transition-all duration-300
-                            bg-one-light/50 backdrop-blur-sm text-one-text hover:text-white hover:bg-one-light
-                            transform hover:-translate-y-1 active:translate-y-0 relative overflow-hidden border border-one-border/30"
+                            bg-one-light text-one-text-muted hover:text-white hover:bg-opacity-80
+                            transform hover:-translate-y-1 active:translate-y-0 relative overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center">
                     View Pricing
@@ -201,7 +262,64 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
               </div>
             </div>
 
-            <div className="lg:w-1/2"></div>
+            <div className={`lg:w-1/2 relative h-96 transition-all duration-1000 transform ${
+              isLoaded ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
+            }`}>
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-one-dark border border-one-border flex items-center justify-center mx-auto shadow-glow-sm">
+                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-one-accent/5 border border-one-accent/20 flex items-center justify-center pulse-element">
+                      <div className="w-16 h-16 md:w-16 md:h-16 rounded-full bg-one-accent/10 border border-one-accent/30 flex items-center justify-center">
+                        <Logo className="scale-75" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 md:w-80 md:h-80 rounded-full border border-one-border/30 animate-rotate-slow">
+                  <span className="absolute w-4 h-4 bg-one-accent/80 rounded-full top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-glow-md"></span>
+                </div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 md:w-96 md:h-96 rounded-full border border-one-border/20 animate-rotate-slow" style={{ animationDuration: '15s' }}>
+                  <span className="absolute w-3 h-3 bg-[#9b87f5]/80 rounded-full top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 shadow-glow-sm"></span>
+                </div>
+                
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 floating-element" style={{ animationDelay: '0.5s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Chatbot AI</div>
+                  </div>
+                </div>
+                
+                <div className="absolute top-1/4 right-0 transform translate-x-1/2 -translate-y-1/4 floating-element" style={{ animationDelay: '1s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Image AI</div>
+                  </div>
+                </div>
+                
+                <div className="absolute bottom-0 right-1/4 transform translate-y-1/2 translate-x-1/4 floating-element" style={{ animationDelay: '1.5s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Video AI</div>
+                  </div>
+                </div>
+                
+                <div className="absolute bottom-0 left-1/4 transform translate-y-1/2 -translate-x-1/4 floating-element" style={{ animationDelay: '2s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Code AI</div>
+                  </div>
+                </div>
+                
+                <div className="absolute top-1/4 left-0 transform -translate-x-1/2 -translate-y-1/4 floating-element" style={{ animationDelay: '2.5s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Design AI</div>
+                  </div>
+                </div>
+                
+                <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 translate-y-1/4 floating-element" style={{ animationDelay: '3s' }}>
+                  <div className="glass-card p-2 rounded-lg shadow-glow-sm w-28 md:w-32 text-center transform transition-transform hover:scale-110 hover:shadow-glow-md duration-300">
+                    <div className="text-sm md:text-base font-medium">Text AI</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         
@@ -212,14 +330,9 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="features" className="section-container py-40 relative">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
-        </div>
-        
+      <section id="features" className="section-container py-40" ref={setValuePropSectionRef}>
         <div className="text-center mb-20">
-          <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20 backdrop-blur-sm">
+          <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
             Why One-Intelligent
           </span>
           <h2 className="text-3xl md:text-5xl font-bold mt-4 mb-6">
@@ -234,7 +347,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
           {features.map((item, index) => (
             <div 
               key={index} 
-              className="value-prop-item flex gap-6 opacity-0 transition-all duration-500 glass-card p-6 rounded-xl hover:shadow-glow-sm"
+              className="value-prop-item flex gap-6 opacity-0 transition-all duration-500"
               style={{transitionDelay: `${index * 0.1}s`}}
             >
               <div className="flex-shrink-0">
@@ -251,7 +364,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="pricing" className="section-container py-40 bg-one-darker relative overflow-hidden">
+      <section id="pricing" className="section-container py-40 bg-one-darker relative overflow-hidden" ref={setPricingSectionRef}>
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
@@ -259,11 +372,11 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         
         <div className="relative z-10">
           <div className="text-center mb-16">
-            <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20 animate-pulse-glow backdrop-blur-sm">
+            <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20 animate-pulse-glow">
               ALL AI ONE PLATFORM
             </span>
             <h2 className="text-3xl md:text-5xl font-bold mt-4 mb-6">
-              Access AI Tools at Affordable Prices
+              Access AI Tools at Affordable Prices with Seamless Experience
             </h2>
             <p className="text-one-text-muted max-w-2xl mx-auto text-lg mb-8">
               Simple, transparent pricing that scales with your requirements.
@@ -277,7 +390,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                 onClick={() => setActivePricingPlan(prev => prev === 'monthly' ? 'annual' : 'monthly')}
                 className="relative h-6 w-12 rounded-full bg-one-border/50"
               >
-                <span className={`absolute top-1 h-4 w-4 rounded-full bg-one-accent shadow-glow-sm transition-all duration-300 ${
+                <span className={`absolute top-1 h-4 w-4 rounded-full bg-one-accent transition-all duration-300 ${
                   activePricingPlan === 'monthly' ? 'left-1' : 'left-7'
                 }`}></span>
               </button>
@@ -291,13 +404,13 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
             {pricingPlans.map((plan, index) => (
               <div 
                 key={index} 
-                className={`pricing-card glass-card rounded-xl p-8 opacity-0 transition-all duration-500 backdrop-blur-md ${
-                  plan.popular ? 'border-one-accent shadow-glow-md' : 'border-one-border/50'
+                className={`pricing-card glass-card rounded-xl p-8 opacity-0 transition-all duration-500 border ${
+                  plan.popular ? 'border-one-accent/50 shadow-glow-sm' : 'border-one-border/50'
                 }`}
                 style={{transitionDelay: `${index * 0.1}s`}}
               >
                 {plan.popular && (
-                  <div className="absolute top-0 right-8 transform -translate-y-1/2 px-4 py-1 bg-gradient-to-r from-[#7B5CFA] to-[#9B87F5] text-white text-xs font-semibold rounded-full shadow-glow-sm">
+                  <div className="absolute top-0 right-8 transform -translate-y-1/2 px-4 py-1 bg-one-accent text-white text-xs font-semibold rounded-full">
                     Most Popular
                   </div>
                 )}
@@ -323,7 +436,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                 <button 
                   className={`w-full py-3 rounded-lg font-medium transition-all duration-300 ${
                     plan.popular
-                      ? 'bg-gradient-to-r from-[#7B5CFA] to-[#9B87F5] text-white hover:opacity-90 shadow-glow-sm hover:shadow-glow-md'
+                      ? 'bg-one-accent text-white hover:bg-one-accent-hover shadow-glow-sm hover:shadow-glow-md'
                       : 'bg-one-light text-one-text hover:bg-one-border'
                   }`}
                 >
@@ -345,14 +458,9 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="reviews" className="section-container py-40 relative">
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
-          <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-one-accent/5 rounded-full filter blur-[100px]"></div>
-        </div>
-        
+      <section id="reviews" className="section-container py-40" ref={setReviewsSectionRef}>
         <div className="text-center mb-16">
-          <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20 backdrop-blur-sm">
+          <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
             What Users Say
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-2">
@@ -368,7 +476,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
             <div className="flex transition-transform duration-700" style={{ transform: `translateX(-${activeTestimonial * 100}%)` }}>
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="w-full flex-shrink-0 px-4">
-                  <div className="review-card glass-card rounded-xl p-8 text-center opacity-0 backdrop-blur-md border border-one-border/30 hover:shadow-glow-sm transition-all duration-300">
+                  <div className="review-card glass-card rounded-xl p-8 text-center opacity-0">
                     <div className="flex justify-center mb-4">
                       {[1, 2, 3, 4, 5].map((star) => (
                         <Star 
@@ -381,7 +489,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                     </div>
                     <p className="text-one-text mb-6 italic">{testimonial.text}</p>
                     <div className="flex items-center justify-center mb-2">
-                      <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-one-accent shadow-glow-sm">
+                      <div className="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-one-accent">
                         <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
                       </div>
                       <div className="text-left">
@@ -401,7 +509,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
                 key={index}
                 onClick={() => setActiveTestimonial(index)}
                 className={`w-3 h-3 rounded-full mx-1 transition-all duration-300 ${
-                  activeTestimonial === index ? 'bg-one-accent shadow-glow-sm' : 'bg-one-border'
+                  activeTestimonial === index ? 'bg-one-accent' : 'bg-one-border'
                 }`}
               />
             ))}
@@ -409,7 +517,7 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         </div>
       </section>
 
-      <section id="cta" className="py-40 relative overflow-hidden mt-24">
+      <section id="cta" className="py-40 relative overflow-hidden mt-24" ref={setCtaSectionRef}>
         <div className="absolute inset-0 bg-gradient-to-b from-one-dark to-one-darker opacity-80"></div>
         <div className="absolute inset-0 opacity-40">
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/lovable-uploads/9092faf0-1f11-4eb6-b372-f68ccf274d6e.png')] bg-cover bg-center"></div>
@@ -417,25 +525,25 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20 inline-block mb-6 cta-animated opacity-0 backdrop-blur-sm">
+            <span className="px-3 py-1 rounded-full bg-one-accent/10 text-one-accent text-sm font-medium border border-one-accent/20">
               Get Started Today
             </span>
             
             <h2 className="text-3xl md:text-5xl font-bold mb-6 cta-animated opacity-0" style={{ animationDelay: '0.1s' }}>
-              Ready To <span className="text-gradient bg-gradient-to-r from-[#7B5CFA] to-[#9B87F5] bg-clip-text text-transparent">Access AI Tools</span> In One Place
+              Now Ready To <span className="text-one-accent">Access AI Tools</span> In Just A One Place.
             </h2>
             
-            <p className="text-one-text-muted text-lg mb-8 cta-animated opacity-0" style={{ animationDelay: '0.2s' }}>
+            <p className="text-one-text-muted text-xs mb-8 cta-animated opacity-0" style={{ animationDelay: '0.2s' }}>
               One platform for all your AI tools & needs
             </p>
             
             <div className="cta-animated opacity-0" style={{ animationDelay: '0.3s' }}>
               <button 
                 onClick={onGetStarted}
-                className="interactive-button text-lg relative overflow-hidden group/cta px-8 py-4 shadow-glow-md"
+                className="interactive-button text-lg relative overflow-hidden group/cta px-8 py-4"
               >
                 <span className="relative z-10 flex items-center">
-                  Get Started Now
+                  Get Started
                   <ArrowRight className="ml-2 inline-block transition-transform duration-300 group-hover/cta:translate-x-1" size={20} />
                 </span>
                 <span className="absolute inset-0 bg-gradient-to-r from-[#7B5CFA] to-[#9B87F5] opacity-0 group-hover/cta:opacity-100 transition-opacity duration-500"></span>

@@ -85,7 +85,7 @@ const Chatbot: React.FC = () => {
     <>
       {/* Chatbot Toggle Button */}
       <button 
-        className="fixed bottom-8 left-8 w-16 h-16 rounded-full bg-one-accent text-white flex items-center justify-center hover:bg-one-accent-hover transition-colors duration-300 shadow-glow-md z-50"
+        className="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-one-accent text-white flex items-center justify-center hover:bg-one-accent-hover transition-colors duration-300 shadow-glow-md z-50"
         onClick={toggleChatbot}
         aria-label="Toggle AI Assistant"
       >
@@ -94,7 +94,7 @@ const Chatbot: React.FC = () => {
 
       {/* Chatbot Modal */}
       {showChatbot && (
-        <div className="fixed bottom-28 left-8 w-96 h-[480px] bg-one-darker border border-one-border rounded-lg shadow-glow-md z-50 overflow-hidden animate-fade-in">
+        <div className="fixed bottom-28 right-8 w-96 h-[480px] bg-one-darker border border-one-border rounded-lg shadow-glow-md z-50 overflow-hidden animate-fade-in">
           <div className="flex justify-between items-center p-4 bg-one-dark border-b border-one-border">
             <h3 className="text-white font-semibold flex items-center">
               <MessageCircle size={18} className="mr-2 text-one-accent" />
