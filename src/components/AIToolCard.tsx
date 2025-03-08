@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
 
 export interface AITool {
   id: string;
@@ -10,6 +10,8 @@ export interface AITool {
   icon: string;
   url: string;
   tags?: string[];
+  rating?: number;
+  pricing?: string;
 }
 
 interface AIToolCardProps {
@@ -83,9 +85,22 @@ const AIToolCard: React.FC<AIToolCardProps> = ({ tool, index }) => {
                 {tool.category}
               </span>
             </div>
-            <p className="text-one-text-muted text-sm line-clamp-3 mb-4">
+            <p className="text-one-text-muted text-sm line-clamp-3 mb-2">
               {tool.description}
             </p>
+            
+            {/* Display rating */}
+            {tool.rating && (
+              <div className="flex items-center mb-2">
+                <div className="flex items-center">
+                  <Star size={14} className="text-yellow-400 fill-yellow-400" />
+                  <span className="ml-1 text-sm text-one-text-muted">{tool.rating.toFixed(1)}</span>
+                </div>
+                {tool.pricing && (
+                  <span className="ml-auto text-xs text-one-text-muted">{tool.pricing}</span>
+                )}
+              </div>
+            )}
           </div>
           
           <a 
