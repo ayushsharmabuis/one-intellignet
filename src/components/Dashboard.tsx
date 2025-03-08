@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Search, User, Bell, Menu, X, LogOut } from 'lucide-react';
 import Logo from './Logo';
@@ -44,10 +43,10 @@ const Dashboard: React.FC<DashboardProps> = ({ preferences, onResetPreferences }
       // Prioritize tools matching user interests but don't exclude others
       filtered.sort((a, b) => {
         const aMatchesInterest = preferences.interests.some(
-          (interest) => a.category.toLowerCase().includes(interest) || a.tags?.includes(interest)
+          (interest) => a.category.toLowerCase().includes(interest) || a.category === interest
         );
         const bMatchesInterest = preferences.interests.some(
-          (interest) => b.category.toLowerCase().includes(interest) || b.tags?.includes(interest)
+          (interest) => b.category.toLowerCase().includes(interest) || b.category === interest
         );
 
         if (aMatchesInterest && !bMatchesInterest) return -1;
@@ -262,217 +261,127 @@ const Dashboard: React.FC<DashboardProps> = ({ preferences, onResetPreferences }
   );
 };
 
-// Mock data for AI tools
+// Mock data for AI tools - replaced with only the chatbot tools
 const mockAITools: AITool[] = [
   {
     id: '1',
     name: 'ChatGPT',
-    description: 'Advanced AI chatbot that can understand and generate human-like text based on context.',
+    description: 'A versatile AI chatbot by OpenAI, capable of natural language understanding and generation.',
     category: 'Chatbots',
     icon: 'https://via.placeholder.com/30',
     url: 'https://chat.openai.com',
     rating: 4.8,
-    pricing: 'Freemium (Free + Paid for GPT-4)',
-    tags: ['chatbots']
+    pricing: 'Freemium (Free + Paid for GPT-4)'
   },
   {
     id: '2',
-    name: 'GitHub Copilot',
-    description: 'AI pair programmer that offers suggestions for whole lines or entire functions as you code.',
-    category: 'Code Generation',
-    icon: 'https://via.placeholder.com/30',
-    url: 'https://github.com/features/copilot',
-    rating: 4.7,
-    pricing: 'Paid',
-    tags: ['code']
-  },
-  {
-    id: '3',
-    name: 'DALL-E',
-    description: 'AI system that can create realistic images and art from natural language descriptions.',
-    category: 'Design Tools',
-    icon: 'https://via.placeholder.com/30',
-    url: 'https://openai.com/dall-e-3',
-    rating: 4.6,
-    pricing: 'Credits-based',
-    tags: ['design']
-  },
-  {
-    id: '4',
-    name: 'Runway ML',
-    description: 'Create, edit, and enhance videos with cutting-edge AI tools and effects.',
-    category: 'Video Tools',
-    icon: 'https://via.placeholder.com/30',
-    url: 'https://runwayml.com',
-    rating: 4.5,
-    pricing: 'Freemium',
-    tags: ['video']
-  },
-  {
-    id: '5',
-    name: 'Zapier AI',
-    description: 'Automate workflows between apps with natural language commands and AI assistance.',
-    category: 'Automation',
-    icon: 'https://via.placeholder.com/30',
-    url: 'https://zapier.com',
-    rating: 4.4,
-    pricing: 'Paid',
-    tags: ['automation']
-  },
-  {
-    id: '6',
-    name: 'Claude',
-    description: 'An AI assistant built for safety and helpfulness with a focus on truthful responses.',
-    category: 'Chatbots',
-    icon: 'https://via.placeholder.com/30',
-    url: 'https://claude.ai',
-    rating: 4.7,
-    pricing: 'Freemium (Free + Paid for Claude Pro)',
-    tags: ['chatbots']
-  },
-  {
-    id: '7',
-    name: 'Midjourney',
-    description: 'AI art generator that creates stunning images from text prompts and descriptions.',
-    category: 'Design Tools',
-    icon: 'https://via.placeholder.com/30',
-    url: 'https://www.midjourney.com',
-    rating: 4.9,
-    pricing: 'Paid',
-    tags: ['design']
-  },
-  {
-    id: '8',
-    name: 'Notion AI',
-    description: 'AI writing assistant that helps you write, edit, summarize, and brainstorm content.',
-    category: 'Writing Tools',
-    icon: 'https://via.placeholder.com/30',
-    url: 'https://notion.so',
-    rating: 4.6,
-    pricing: 'Paid add-on',
-    tags: ['writing']
-  },
-  {
-    id: '9',
-    name: 'Jasper',
-    description: 'AI content platform that helps teams create content faster and with better results.',
-    category: 'Writing Tools',
-    icon: 'https://via.placeholder.com/30',
-    url: 'https://jasper.ai',
-    rating: 4.5,
-    pricing: 'Paid',
-    tags: ['writing']
-  },
-  // New AI Chatbot tools
-  {
-    id: '10',
     name: 'Google Gemini',
     description: 'Google\'s advanced AI chatbot powered by the Gemini model, designed for conversational AI and real-time information.',
     category: 'Chatbots',
     icon: 'https://via.placeholder.com/30',
     url: 'https://gemini.google.com',
     rating: 4.6,
-    pricing: 'Free',
-    tags: ['chatbots']
+    pricing: 'Free'
   },
   {
-    id: '11',
+    id: '3',
     name: 'Microsoft Bing AI',
     description: 'Integrated with Bing search, this chatbot provides real-time information and assistance.',
     category: 'Chatbots',
     icon: 'https://via.placeholder.com/30',
     url: 'https://bing.com/chat',
     rating: 4.5,
-    pricing: 'Free',
-    tags: ['chatbots']
+    pricing: 'Free'
   },
   {
-    id: '12',
+    id: '4',
+    name: 'Claude',
+    description: 'A conversational AI focused on safety and helpfulness, developed by Anthropic.',
+    category: 'Chatbots',
+    icon: 'https://via.placeholder.com/30',
+    url: 'https://claude.ai',
+    rating: 4.7,
+    pricing: 'Freemium (Free + Paid for Claude Pro)'
+  },
+  {
+    id: '5',
     name: 'Perplexity AI',
     description: 'An AI-powered search engine and chatbot that provides concise, sourced answers.',
     category: 'Chatbots',
     icon: 'https://via.placeholder.com/30',
     url: 'https://perplexity.ai',
     rating: 4.7,
-    pricing: 'Freemium (Free + Paid for Pro features)',
-    tags: ['chatbots']
+    pricing: 'Freemium (Free + Paid for Pro features)'
   },
   {
-    id: '13',
+    id: '6',
     name: 'DeepSeek Chat',
     description: 'A powerful AI chatbot developed by DeepSeek, offering advanced conversational capabilities.',
     category: 'Chatbots',
     icon: 'https://via.placeholder.com/30',
     url: 'https://deepseek.com',
     rating: 4.5,
-    pricing: 'Freemium (Free + Paid for advanced features)',
-    tags: ['chatbots']
+    pricing: 'Freemium (Free + Paid for advanced features)'
   },
   {
-    id: '14',
+    id: '7',
     name: 'HuggingChat',
     description: 'An open-source AI chatbot by Hugging Face, offering customizable conversational AI.',
     category: 'Chatbots',
     icon: 'https://via.placeholder.com/30',
     url: 'https://huggingface.co/chat',
     rating: 4.4,
-    pricing: 'Free',
-    tags: ['chatbots']
+    pricing: 'Free'
   },
   {
-    id: '15',
+    id: '8',
     name: 'Jasper Chat',
     description: 'A chatbot designed for businesses, specializing in content creation and marketing.',
     category: 'Chatbots',
     icon: 'https://via.placeholder.com/30',
     url: 'https://jasper.ai',
     rating: 4.6,
-    pricing: 'Paid (Starts at $39/month)',
-    tags: ['chatbots']
+    pricing: 'Paid (Starts at $39/month)'
   },
   {
-    id: '16',
+    id: '9',
     name: 'Character.AI',
     description: 'A chatbot platform that allows users to create and interact with AI-powered characters.',
     category: 'Chatbots',
     icon: 'https://via.placeholder.com/30',
     url: 'https://beta.character.ai',
     rating: 4.7,
-    pricing: 'Freemium (Free + Paid for faster responses)',
-    tags: ['chatbots']
+    pricing: 'Freemium (Free + Paid for faster responses)'
   },
   {
-    id: '17',
+    id: '10',
     name: 'Replika',
     description: 'An AI companion chatbot focused on emotional support and personal interaction.',
     category: 'Chatbots',
     icon: 'https://via.placeholder.com/30',
     url: 'https://replika.ai',
     rating: 4.5,
-    pricing: 'Freemium (Free + Paid for premium features)',
-    tags: ['chatbots']
+    pricing: 'Freemium (Free + Paid for premium features)'
   },
   {
-    id: '18',
+    id: '11',
     name: 'Mantra AI',
     description: 'Mantra AI is Indian powered AI Chatbot powered by one-intelligent.',
     category: 'Chatbots',
     icon: 'https://via.placeholder.com/30',
     url: 'https://mantraai.netlify.app',
     rating: 4.6,
-    pricing: 'Free',
-    tags: ['chatbots']
+    pricing: 'Free'
   },
   {
-    id: '19',
+    id: '12',
     name: 'x.ai',
     description: 'A high-performance AI platform designed for fast and efficient AI inference.',
     category: 'Chatbots',
     icon: 'https://via.placeholder.com/30',
     url: 'https://x.ai',
     rating: 4.8,
-    pricing: 'Paid (Contact for pricing)',
-    tags: ['chatbots']
+    pricing: 'Paid (Contact for pricing)'
   }
 ];
 
