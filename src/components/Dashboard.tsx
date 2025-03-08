@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from 'react';
-import { Search, User, Bell, Menu, X, LogOut } from 'lucide-react';
+import { Search, User, Bell, Menu, X, LogOut, Film } from 'lucide-react';
 import Logo from './Logo';
 import AIToolCard, { AITool } from './AIToolCard';
 import CategorySelector from './CategorySelector';
@@ -261,7 +262,7 @@ const Dashboard: React.FC<DashboardProps> = ({ preferences, onResetPreferences }
   );
 };
 
-// Mock data for AI tools - replaced with only the chatbot tools
+// Mock data for AI tools
 const mockAITools: AITool[] = [
   {
     id: '1',
@@ -381,6 +382,107 @@ const mockAITools: AITool[] = [
     icon: 'https://via.placeholder.com/30',
     url: 'https://x.ai',
     rating: 4.8,
+    pricing: 'Paid (Contact for pricing)'
+  },
+  // Text to Video Tools
+  {
+    id: '13',
+    name: 'Synthesia',
+    description: 'A leading AI video generation platform that creates professional videos from text using AI avatars.',
+    category: 'Text to Video',
+    icon: 'https://via.placeholder.com/30',
+    url: 'https://synthesia.io',
+    rating: 4.7,
+    pricing: 'Paid (Starts at $30/month)'
+  },
+  {
+    id: '14',
+    name: 'Pictory',
+    description: 'Converts blog posts and text into engaging videos with AI voiceovers and visuals.',
+    category: 'Text to Video',
+    icon: 'https://via.placeholder.com/30',
+    url: 'https://pictory.ai',
+    rating: 4.6,
+    pricing: 'Freemium (Free + Paid plans from $19/month)'
+  },
+  {
+    id: '15',
+    name: 'Lumen5',
+    description: 'A user-friendly tool that transforms text into videos for marketing, social media, and presentations.',
+    category: 'Text to Video',
+    icon: 'https://via.placeholder.com/30',
+    url: 'https://lumen5.com',
+    rating: 4.5,
+    pricing: 'Freemium (Free + Paid plans from $29/month)'
+  },
+  {
+    id: '16',
+    name: 'Runway ML',
+    description: 'A creative suite for AI-powered video editing, including text-to-video generation.',
+    category: 'Text to Video',
+    icon: 'https://via.placeholder.com/30',
+    url: 'https://runwayml.com',
+    rating: 4.8,
+    pricing: 'Freemium (Free + Paid plans from $15/month)'
+  },
+  {
+    id: '17',
+    name: 'InVideo',
+    description: 'A video creation platform that uses AI to turn text into professional videos with templates.',
+    category: 'Text to Video',
+    icon: 'https://via.placeholder.com/30',
+    url: 'https://invideo.io',
+    rating: 4.6,
+    pricing: 'Freemium (Free + Paid plans from $15/month)'
+  },
+  {
+    id: '18',
+    name: 'Designs.ai',
+    description: 'An AI-powered design suite that includes text-to-video capabilities for quick video creation.',
+    category: 'Text to Video',
+    icon: 'https://via.placeholder.com/30',
+    url: 'https://designs.ai',
+    rating: 4.5,
+    pricing: 'Freemium (Free + Paid plans from $29/month)'
+  },
+  {
+    id: '19',
+    name: 'Elai.io',
+    description: 'Generates videos from text using AI avatars and voiceovers in multiple languages.',
+    category: 'Text to Video',
+    icon: 'https://via.placeholder.com/30',
+    url: 'https://elai.io',
+    rating: 4.6,
+    pricing: 'Freemium (Free + Paid plans from $23/month)'
+  },
+  {
+    id: '20',
+    name: 'Pictory',
+    description: 'Converts long-form text into short, engaging videos with AI-generated visuals and voiceovers.',
+    category: 'Text to Video',
+    icon: 'https://via.placeholder.com/30',
+    url: 'https://pictory.ai',
+    rating: 4.7,
+    pricing: 'Freemium (Free + Paid plans from $19/month)'
+  },
+  {
+    id: '21',
+    name: 'DeepBrain AI',
+    description: 'Creates AI-generated videos from text using realistic AI avatars and voice synthesis.',
+    category: 'Text to Video',
+    icon: 'https://via.placeholder.com/30',
+    url: 'https://deepbrain.io',
+    rating: 4.6,
+    pricing: 'Paid (Starts at $30/month)'
+  },
+  {
+    id: '22',
+    name: 'Vidnami',
+    description: 'A video creation tool that uses AI to turn text into engaging marketing videos.',
+    category: 'Text to Video',
+    icon: 'https://via.placeholder.com/30',
+    url: 'https://godaddy.com',
+    rating: 4.5,
     pricing: 'Paid (Contact for pricing)'
   }
 ];

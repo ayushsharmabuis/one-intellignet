@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, Star, Film } from 'lucide-react';
 
 export interface AITool {
   id: string;
@@ -73,12 +73,28 @@ const AIToolCard: React.FC<AIToolCardProps> = ({ tool, index }) => {
         <div className="p-6">
           <div className="mb-4 w-12 h-12 rounded-lg bg-one-accent/10 flex items-center justify-center text-one-accent transform transition-transform group-hover:scale-110 duration-300">
             <div className="w-8 h-8 flex items-center justify-center">
-              <img 
-                src={tool.icon} 
-                alt={`${tool.name} icon`} 
-                className="w-6 h-6 object-contain" 
-                loading="lazy"
-              />
+              {tool.category === 'Text to Video' ? (
+                <Film className="w-6 h-6 text-one-accent" />
+              ) : (
+                <img 
+                  src={tool.icon} 
+                  alt={`${tool.name} icon`} 
+                  className="w-6 h-6 object-contain" 
+                  loading="lazy"
+                  onError={(e) => {
+                    // Fallback if image fails to load
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    const parent = target.parentElement;
+                    if (parent) {
+                      const fallbackIcon = document.createElement('span');
+                      fallbackIcon.textContent = tool.name.charAt(0);
+                      fallbackIcon.className = 'text-one-accent font-bold text-lg';
+                      parent.appendChild(fallbackIcon);
+                    }
+                  }}
+                />
+              )}
             </div>
           </div>
           
@@ -94,18 +110,18 @@ const AIToolCard: React.FC<AIToolCardProps> = ({ tool, index }) => {
                 {tool.description}
               </p>
               
-              {/* Display rating */}
-              {tool.rating && (
-                <div className="flex items-center mb-2">
+              {/* Display rating and pricing consistently for all tools */}
+              <div className="flex items-center mb-2">
+                {tool.rating && (
                   <div className="flex items-center">
                     <Star size={14} className="text-yellow-400 fill-yellow-400" />
                     <span className="ml-1 text-sm text-one-text-muted">{tool.rating.toFixed(1)}</span>
                   </div>
-                  {tool.pricing && (
-                    <span className="ml-auto text-xs text-one-text-muted">{tool.pricing}</span>
-                  )}
-                </div>
-              )}
+                )}
+                {tool.pricing && (
+                  <span className="ml-auto text-xs text-one-text-muted">{tool.pricing}</span>
+                )}
+              </div>
             </div>
             
             <div className="flex items-center mt-auto text-one-accent font-medium group/link">
