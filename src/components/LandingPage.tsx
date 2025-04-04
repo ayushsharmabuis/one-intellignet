@@ -783,51 +783,6 @@ const testimonials = [
   },
 ];
 
-const blogPosts = [
-  {
-    title: "The Future of AI-Powered Workflow Automation",
-    excerpt: "Discover how AI is revolutionizing workflow automation and increasing productivity across industries.",
-    category: "insights",
-    date: "June 15, 2023",
-    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    title: "Getting Started with AI Image Generation: A Beginner's Guide",
-    excerpt: "Learn the basics of AI image generation and how to create stunning visuals with simple prompts.",
-    category: "tutorials",
-    date: "May 28, 2023",
-    image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    title: "How AI is Transforming the Creative Industry",
-    excerpt: "An in-depth look at how artificial intelligence is changing the landscape for designers, writers, and artists.",
-    category: "insights",
-    date: "May 12, 2023",
-    image: "https://images.unsplash.com/photo-1619450463848-41fba8a3114b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    title: "Building Your First AI-Powered Chatbot",
-    excerpt: "Step-by-step tutorial on how to create and deploy your first AI chatbot using modern frameworks.",
-    category: "tutorials",
-    date: "April 30, 2023",
-    image: "https://images.unsplash.com/photo-1677442135146-2c6ba474b4b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    title: "AI Breakthroughs: Top 10 Innovations of 2023",
-    excerpt: "Explore the most significant AI advancements and breakthroughs that happened this year.",
-    category: "news",
-    date: "April 22, 2023",
-    image: "https://images.unsplash.com/photo-1647166545674-ce28ce93bdca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-  },
-  {
-    title: "How a Fintech Company Reduced Costs by 40% Using AI",
-    excerpt: "Case study on how artificial intelligence helped optimize operations and reduce overhead.",
-    category: "case-studies",
-    date: "April 15, 2023",
-    image: "https://images.unsplash.com/photo-1617791160505-6f00504e3519?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-  },
-];
-
 const footerLinks = [
   {
     title: 'Product',

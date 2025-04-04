@@ -52,14 +52,6 @@ const Navbar: React.FC = () => {
               >
                 About
               </Link>
-              <a
-                href="/blogs"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-one-text-muted hover:text-white transition-colors duration-200"
-              >
-                Blog
-              </a>
               <button 
                 className="px-6 py-2 rounded-lg bg-one-accent text-white hover:bg-one-accent/90 transition-all duration-300 font-medium"
                 onClick={handleGetStarted}
@@ -101,15 +93,6 @@ const Navbar: React.FC = () => {
             >
               About
             </Link>
-            <a
-              href="/blogs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-one-text-muted hover:text-one-text transition-colors duration-200"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Blog
-            </a>
             <button
               className="px-6 py-2 rounded-lg bg-one-accent text-white hover:bg-one-accent/90 transition-all duration-300 font-medium mt-4"
               onClick={() => {

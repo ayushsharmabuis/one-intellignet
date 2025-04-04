@@ -15,9 +15,6 @@ import WhatsNew from './pages/WhatsNew';
 import NotFound from './pages/NotFound';
 import UploadTools from './pages/UploadTools';
 import Dashboard from './components/Dashboard';
-import Blogs from './pages/Blogs';
-import BlogDetail from './pages/BlogDetail';
-import AdminBlog from './pages/admin/AdminBlog';
 
 // Protected route component
 interface ProtectedRouteProps {
@@ -59,10 +56,6 @@ const App = () => {
             <Route path="/whats-new" element={<WhatsNew />} />
             <Route path="/upload-tools" element={<UploadTools />} />
             
-            {/* Blog routes */}
-            <Route path="/blogs" element={<Blogs />} />
-            <Route path="/blogs/:slug" element={<BlogDetail />} />
-            
             {/* Protected routes */}
             <Route 
               path="/dashboard" 
@@ -74,16 +67,6 @@ const App = () => {
                     pricingPreference: '',
                     completedQuestionnaire: true
                   }} />
-                </ProtectedRoute>
-              } 
-            />
-            
-            {/* Admin routes */}
-            <Route 
-              path="/admin/blogs" 
-              element={
-                <ProtectedRoute requireAdmin={true}>
-                  <AdminBlog />
                 </ProtectedRoute>
               } 
             />
