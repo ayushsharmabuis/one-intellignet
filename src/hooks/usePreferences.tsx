@@ -1,5 +1,5 @@
-
 import { useState, useEffect } from 'react';
+import { useAuth } from '../lib/AuthContext';
 
 // Define types for user preferences
 export interface UserPreferences {
@@ -18,10 +18,14 @@ const defaultPreferences: UserPreferences = {
 };
 
 export const usePreferences = () => {
+  const { currentUser, isNewUser, userProfile } = useAuth();
+  const userId = currentUser?.uid || 'anonymous';
+  
   // Initialize state from localStorage if available
   const [preferences, setPreferences] = useState<UserPreferences>(() => {
     try {
-      const savedPrefs = localStorage.getItem('userPreferences');
+      const storageKey = `userPreferences_${userId}`;
+      const savedPrefs = localStorage.getItem(storageKey);
       return savedPrefs ? JSON.parse(savedPrefs) : defaultPreferences;
     } catch (error) {
       console.error('Error loading preferences from localStorage:', error);
@@ -29,14 +33,31 @@ export const usePreferences = () => {
     }
   });
 
+  // Synchronize with Firebase user status
+  useEffect(() => {
+    if (currentUser && userProfile) {
+      // If user exists in Firebase and has a profile
+      const completedQuestionnaire = userProfile.isNewUser === false;
+      
+      if (completedQuestionnaire !== preferences.completedQuestionnaire) {
+        console.log("Updating questionnaire status from Firebase:", completedQuestionnaire);
+        setPreferences(prev => ({
+          ...prev,
+          completedQuestionnaire
+        }));
+      }
+    }
+  }, [currentUser, userProfile, isNewUser, preferences.completedQuestionnaire]);
+
   // Update localStorage when preferences change
   useEffect(() => {
     try {
-      localStorage.setItem('userPreferences', JSON.stringify(preferences));
+      const storageKey = `userPreferences_${userId}`;
+      localStorage.setItem(storageKey, JSON.stringify(preferences));
     } catch (error) {
       console.error('Error saving preferences to localStorage:', error);
     }
-  }, [preferences]);
+  }, [preferences, userId]);
 
   // Update interests
   const updateInterests = (interests: string[]) => {
@@ -60,8 +81,9 @@ export const usePreferences = () => {
 
   // Reset preferences to default
   const resetPreferences = () => {
+    const storageKey = `userPreferences_${userId}`;
     setPreferences(defaultPreferences);
-    localStorage.removeItem('userPreferences');
+    localStorage.removeItem(storageKey);
   };
 
   return {

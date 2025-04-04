@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -61,11 +60,26 @@
   html {
     @apply scroll-smooth;
   }
+  
+  /* Improved text visibility */
+  h1, h2, h3, h4, h5, h6 {
+    color: white !important;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  p, span, div {
+    color: inherit !important;
+  }
+  
+  .text-one-accent {
+    color: rgb(123, 92, 250) !important;
+    text-shadow: 0 0 15px rgba(123, 92, 250, 0.4);
+  }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-one-card backdrop-blur-md border border-one-border/50 shadow-card;
+    @apply bg-one-card/30 backdrop-blur-md border border-one-border/50 shadow-card;
   }
   
   .glow-effect {
@@ -95,10 +109,8 @@
   .interactive-button {
     @apply relative px-6 py-3 rounded-lg font-medium transition-all duration-300
            bg-one-accent text-white shadow-glow-sm 
-           hover:shadow-glow-md hover:bg-one-accent-hover
-           transform hover:-translate-y-1 active:translate-y-0
-           before:absolute before:inset-0 before:rounded-lg before:bg-one-accent/0
-           before:hover:bg-one-accent/10 before:transition-colors;
+           hover:shadow-glow-md hover:bg-one-accent/90
+           transform hover:-translate-y-1 active:translate-y-0;
   }
 
   .custom-scrollbar {
@@ -111,7 +123,7 @@
   }
   
   .hero-gradient {
-    @apply absolute inset-0 bg-hero-glow opacity-80;
+    background: radial-gradient(circle at 50% 50%, rgba(123, 92, 250, 0.15), rgba(20, 20, 35, 0) 70%);
   }
   
   .floating-element {
@@ -155,6 +167,32 @@
   .neon-text {
     @apply text-one-accent;
     text-shadow: 0 0 5px rgba(123, 92, 250, 0.5), 0 0 10px rgba(123, 92, 250, 0.3);
+  }
+  
+  /* Gradient text effect */
+  .gradient-text {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(45deg, #fff, #d1d1d1);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  
+  .gradient-blue-pink {
+    @apply text-transparent bg-clip-text;
+    background-image: linear-gradient(45deg, #7B5CFA, #d946ef);
+    background-size: 200% auto;
+    animation: gradient-shift 4s ease infinite;
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
 
@@ -246,4 +284,317 @@
 .animate-liquid {
   animation: liquid-wave 8s infinite;
   background-size: 200% 200%;
+}
+
+@layer utilities {
+  .animate-dash-offset {
+    stroke-dasharray: 5, 5;
+    animation: dash 3s linear infinite;
+  }
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 50;
+    }
+  }
+  
+  .pulse-element {
+    animation: pulse-scale 4s ease-in-out infinite;
+  }
+  
+  @keyframes pulse-scale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  .floating-element {
+    animation: float 5s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .shadow-glow-sm {
+    box-shadow: 0 0 10px rgba(123, 92, 250, 0.3);
+  }
+  
+  .shadow-glow-md {
+    box-shadow: 0 0 20px rgba(123, 92, 250, 0.4);
+  }
+  
+  .glass-card {
+    background-color: rgba(25, 25, 40, 0.3);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(123, 92, 250, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .glass-card:hover {
+    border-color: rgba(123, 92, 250, 0.4);
+    box-shadow: 0 0 15px rgba(123, 92, 250, 0.3);
+  }
+}
+
+/* Professional Categories Styling */
+.professional-categories-section {
+  margin-top: 6rem; /* Increased from 2rem to 6rem to move it further down */
+}
+
+/* Animation keyframes */
+@keyframes rotate-slow {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.8;
+    box-shadow: 0 0 20px rgba(123, 92, 250, 0.4);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 30px rgba(123, 92, 250, 0.7);
+  }
+}
+
+@keyframes dash-offset {
+  to {
+    stroke-dashoffset: 20;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-bottom {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Utility classes */
+.bg-hero-glow {
+  background: radial-gradient(circle at 50% 50%, rgba(123, 92, 250, 0.1), transparent 70%);
+}
+
+.shadow-glow-sm {
+  box-shadow: 0 0 10px rgba(123, 92, 250, 0.3);
+}
+
+.shadow-glow-md {
+  box-shadow: 0 0 20px rgba(123, 92, 250, 0.4);
+}
+
+.floating-element {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-dash-offset {
+  animation: dash-offset 20s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+  opacity: 1 !important; /* Ensure elements are visible regardless of initial state */
+  color: inherit !important; /* Ensure text color is not affected */
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Add subtle text shadow for better readability */
+}
+
+.animate-slide-in-bottom {
+  animation: slide-in-bottom 0.5s ease-out forwards;
+  opacity: 1 !important; /* Ensure elements are visible regardless of initial state */
+  color: inherit !important; /* Ensure text color is not affected */
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Add subtle text shadow for better readability */
+}
+
+.pulse-element {
+  position: relative;
+}
+
+.pulse-element::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  border: 1px solid rgba(123, 92, 250, 0.3);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Update background and glow effects */
+.bg-one-dark {
+  background-color: #0d0d18;
+}
+
+.text-one-accent {
+  color: rgb(123, 92, 250) !important;
+  text-shadow: 0 0 15px rgba(123, 92, 250, 0.4);
+}
+
+/* Button specific styles for hero section */
+.hero-get-started-btn {
+  background-color: rgb(123, 92, 250);
+  transition: all 0.3s ease;
+}
+
+.hero-get-started-btn:hover {
+  background-color: rgba(123, 92, 250, 0.9);
+  box-shadow: 0 0 15px rgba(123, 92, 250, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Update hero section styles */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-elements {
+  z-index: 10;
+  width: 100%;
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at 50% 50%, rgba(123, 92, 250, 0.15), rgba(20, 20, 35, 0) 70%);
+  position: absolute;
+  inset: 0;
+}
+
+/* Signup page styles */
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(20, 20, 35, 0.7), rgba(10, 10, 20, 0.9) 100%);
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.animated-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(123, 92, 250, 0.08), transparent 60%);
+  z-index: 1;
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+/* Floating label inputs */
+.form-group {
+  position: relative;
+}
+
+input:focus-visible {
+  outline: 0;
+  border-color: rgba(123, 92, 250, 0.7);
+  box-shadow: 0 0 0 2px rgba(123, 92, 250, 0.3);
+}
+
+/* Card animation and effects */
+.card-glare {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 25%,
+    rgba(123, 92, 250, 0.05) 50%,
+    transparent 75%
+  );
+  background-size: 200% 200%;
+  animation: glare 6s linear infinite;
+  z-index: 1;
+}
+
+@keyframes glare {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 200%;
+  }
+}
+
+/* Social buttons hover effects */
+.social-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.social-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: rgba(123, 92, 250, 0.1);
+  transition: width 0.3s ease;
+  z-index: 0;
+}
+
+.social-button:hover:before {
+  width: 100%;
+}
+
+/* SVG Icons */
+.google-icon {
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
 }

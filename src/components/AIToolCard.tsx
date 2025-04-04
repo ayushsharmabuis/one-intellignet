@@ -1,146 +1,95 @@
-
-import React, { useEffect, useRef } from 'react';
-import { ArrowRight, Star, Film } from 'lucide-react';
+import React from 'react';
+import { Star, ArrowRight } from 'lucide-react';
 
 export interface AITool {
   id: string;
   name: string;
   description: string;
   category: string;
+  subcategory?: string;
   icon: string;
   url: string;
-  rating?: number;
-  pricing?: string;
+  rating: number;
+  pricing: string;
+  tags?: string[];
 }
 
 interface AIToolCardProps {
   tool: AITool;
   index: number;
+  isSaved?: boolean;
+  onToggleSave?: (id: string) => void;
 }
 
-const AIToolCard: React.FC<AIToolCardProps> = ({ tool, index }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const card = cardRef.current;
-    if (!card) return;
-
-    // Mouse move effect for the card
-    const handleMouseMove = (e: MouseEvent) => {
-      const { left, top, width, height } = card.getBoundingClientRect();
-      const x = (e.clientX - left) / width;
-      const y = (e.clientY - top) / height;
-      
-      // Calculate rotation based on mouse position
-      const rotateY = 10 * (0.5 - x);
-      const rotateX = 10 * (y - 0.5);
-      
-      // Apply 3D rotation and lighting effect
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-      card.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, rgba(123, 92, 250, 0.15), transparent)`;
-    };
-
-    const handleMouseLeave = () => {
-      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-      card.style.background = '';
-    };
-
-    card.addEventListener('mousemove', handleMouseMove);
-    card.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      card.removeEventListener('mousemove', handleMouseMove);
-      card.removeEventListener('mouseleave', handleMouseLeave);
-    };
-  }, []);
-
+const AIToolCard: React.FC<AIToolCardProps> = ({ 
+  tool, 
+  index, 
+  isSaved = false,
+  onToggleSave
+}) => {
   return (
-    <a 
-      href={tool.url} 
-      target="_blank" 
-      rel="noopener noreferrer"
-      className="block"
-    >
-      <div 
-        ref={cardRef}
-        className="glass-card rounded-xl overflow-hidden relative group transition-all duration-500 glow-effect cursor-pointer"
-        style={{ 
-          animationDelay: `${index * 100}ms`,
-          transformStyle: 'preserve-3d',
-          transition: 'transform 0.3s ease, background 0.3s ease'
-        }}
-      >
-        <div className="p-6">
-          <div className="mb-4 w-12 h-12 rounded-lg bg-one-accent/10 flex items-center justify-center text-one-accent transform transition-transform group-hover:scale-110 duration-300">
-            <div className="w-8 h-8 flex items-center justify-center">
-              {tool.category === 'Text to Video' ? (
-                <Film className="w-6 h-6 text-one-accent" />
-              ) : (
-                <img 
-                  src={tool.icon} 
-                  alt={`${tool.name} icon`} 
-                  className="w-6 h-6 object-contain" 
-                  loading="lazy"
-                  onError={(e) => {
-                    // Fallback if image fails to load
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    const parent = target.parentElement;
-                    if (parent) {
-                      const fallbackIcon = document.createElement('span');
-                      fallbackIcon.textContent = tool.name.charAt(0);
-                      fallbackIcon.className = 'text-one-accent font-bold text-lg';
-                      parent.appendChild(fallbackIcon);
-                    }
-                  }}
-                />
-              )}
-            </div>
-          </div>
-          
-          <div className="flex flex-col h-full">
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <h3 className="font-bold text-lg text-one-text">{tool.name}</h3>
-                <span className="text-xs px-2 py-1 rounded-full bg-one-accent/10 text-one-accent border border-one-accent/20">
-                  {tool.category}
-                </span>
-              </div>
-              <p className="text-one-text-muted text-sm line-clamp-3 mb-2">
-                {tool.description}
-              </p>
-              
-              {/* Display rating and pricing consistently for all tools */}
-              <div className="flex items-center mb-2">
-                {tool.rating && (
-                  <div className="flex items-center">
-                    <Star size={14} className="text-yellow-400 fill-yellow-400" />
-                    <span className="ml-1 text-sm text-one-text-muted">{tool.rating.toFixed(1)}</span>
-                  </div>
-                )}
-                {tool.pricing && (
-                  <span className="ml-auto text-xs text-one-text-muted">{tool.pricing}</span>
-                )}
-              </div>
-            </div>
-            
-            <div className="flex items-center mt-auto text-one-accent font-medium group/link">
-              <span className="relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:-bottom-1 after:left-0 after:bg-one-accent after:origin-bottom-right after:transition-transform after:duration-300 group-hover/link:after:scale-x-100 group-hover/link:after:origin-bottom-left">Try Tool</span>
-              <ArrowRight size={16} className="ml-1 transition-transform duration-300 group-hover/link:translate-x-1" />
-            </div>
-          </div>
-        </div>
-        
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 bg-gradient-to-b from-transparent to-one-accent/5 transition-opacity duration-300"></div>
-        
-        {/* Animated border effect */}
-        <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-          <div className="absolute inset-0 border border-one-accent/0 group-hover:border-one-accent/30 rounded-xl transition-all duration-500"></div>
-          <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-one-accent/50 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1500 ease-in-out"></div>
-          <div className="absolute bottom-0 right-0 w-full h-[1px] bg-gradient-to-r from-transparent via-one-accent/50 to-transparent transform translate-x-full group-hover:-translate-x-full transition-transform duration-1500 ease-in-out"></div>
+    <div className="bg-[#1F1F2E] rounded-lg p-5 h-full flex flex-col hover:border-gray-700 transition-all duration-200">
+      {/* Top section with icon */}
+      <div className="mb-3">
+        <div className="h-10 w-10 rounded bg-[#2D2D3E] flex items-center justify-center overflow-hidden">
+          {tool.icon ? (
+            <img 
+              src={tool.icon} 
+              alt={tool.name} 
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <span className="text-xs text-white font-medium">
+              {tool.name.substring(0, 2).toUpperCase()}
+            </span>
+          )}
         </div>
       </div>
-    </a>
+      
+      {/* Name and category badge */}
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="font-medium text-white text-lg">{tool.name}</h3>
+        <div className="px-3 py-1 bg-[#2D2D3E] text-[#8969FF] rounded-full text-xs">
+          {tool.category === 'AI Video Generation' ? 'Text to Video' : tool.category}
+        </div>
+      </div>
+      
+      {/* Description */}
+      <div className="flex-grow flex items-center mb-5">
+        <p className="text-sm text-gray-300 leading-relaxed max-h-[4.8em] overflow-hidden text-center px-1"
+           style={{ 
+             display: '-webkit-box', 
+             WebkitLineClamp: 3, 
+             WebkitBoxOrient: 'vertical',
+             lineHeight: '1.6',
+             wordSpacing: '0.05em',
+             hyphens: 'auto'
+           }}>
+          {tool.description}
+        </p>
+      </div>
+      
+      {/* Rating and pricing */}
+      <div className="flex items-center justify-between text-xs text-gray-300 mt-auto mb-4">
+        <div className="flex items-center">
+          <Star size={14} className="text-yellow-400 mr-1" />
+          <span>{tool.rating.toFixed(1)}</span>
+        </div>
+        <div>
+          <span>{tool.pricing}</span>
+        </div>
+      </div>
+      
+      {/* Try Tool button */}
+      <a 
+        href={tool.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-[#8969FF] hover:text-[#9979FF] text-sm font-medium flex items-center"
+      >
+        Try Tool <ArrowRight size={14} className="ml-1" />
+      </a>
+    </div>
   );
 };
 

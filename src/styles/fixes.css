@@ -1,0 +1,4 @@
+/* Fixes for layout issues */
+.no-tools-message {
+  display: none !important;
+} 

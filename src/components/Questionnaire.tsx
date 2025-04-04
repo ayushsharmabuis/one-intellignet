@@ -1,6 +1,18 @@
-
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, ArrowLeft, Check, X } from 'lucide-react';
+import { 
+  ArrowRight, 
+  ArrowLeft, 
+  Check, 
+  X, 
+  MessageSquare,
+  Code,
+  Paintbrush,
+  Video,
+  Settings2,
+  PenTool,
+  Music,
+  Search
+} from 'lucide-react';
 import { UserPreferences } from '../hooks/usePreferences';
 
 interface QuestionnaireProps {
@@ -79,14 +91,14 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
   };
 
   const interestOptions = [
-    { value: 'chatbots', label: 'Chatbots', icon: '💬' },
-    { value: 'code', label: 'Code Generation', icon: '👨‍💻' },
-    { value: 'design', label: 'AI Design Tools', icon: '🎨' },
-    { value: 'video', label: 'AI Video Tools', icon: '🎬' },
-    { value: 'automation', label: 'Automation', icon: '⚙️' },
-    { value: 'writing', label: 'Content Writing', icon: '✍️' },
-    { value: 'audio', label: 'Audio & Music', icon: '🎵' },
-    { value: 'research', label: 'Research & Analysis', icon: '🔍' },
+    { value: 'chatbots', label: 'Chatbots', icon: MessageSquare },
+    { value: 'code', label: 'Code Generation', icon: Code },
+    { value: 'design', label: 'AI Design Tools', icon: Paintbrush },
+    { value: 'video', label: 'AI Video Tools', icon: Video },
+    { value: 'automation', label: 'Automation', icon: Settings2 },
+    { value: 'writing', label: 'Content Writing', icon: PenTool },
+    { value: 'audio', label: 'Audio & Music', icon: Music },
+    { value: 'research', label: 'Research & Analysis', icon: Search },
   ];
 
   const frequencyOptions = [
@@ -150,7 +162,9 @@ const Questionnaire: React.FC<QuestionnaireProps> = ({
                           <Check size={16} className="text-one-accent" />
                         </div>
                       )}
-                      <span className="text-2xl mb-2">{option.icon}</span>
+                      <div className="text-2xl mb-2 text-one-accent">
+                        {React.createElement(option.icon, { size: 28 })}
+                      </div>
                       <span className="text-sm">{option.label}</span>
                     </button>
                   ))}

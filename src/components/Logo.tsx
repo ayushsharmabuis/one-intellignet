@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface LogoProps {
@@ -14,7 +13,7 @@ const Logo: React.FC<LogoProps> = ({ className }) => {
         </div>
         <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-one-accent animate-pulse-glow shadow-glow-sm"></div>
       </div>
-      <div className="text-xl font-bold tracking-tight text-one-text">
+      <div className="text-xl font-bold tracking-tight text-white">
         <span>One</span>
         <span className="text-one-accent">Intelligent</span>
       </div>
