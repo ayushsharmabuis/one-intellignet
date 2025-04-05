@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowDown, ArrowRight, Bot, Star, Zap, ChevronUp, Github, Twitter, Linkedin, Instagram, Check, Shield, Sparkles, Cpu, Film } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import AnimatedBackground from './AnimatedBackground';
 import { useIntersectionObserver } from '../utils/animations';
@@ -696,15 +697,15 @@ const LandingPage: React.FC<{ onGetStarted: () => void }> = ({ onGetStarted }) =
               © 2025 OneIntelligent. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="text-one-text-muted hover:text-white text-sm transition-colors duration-300">
+              <Link to="/legal#privacy" className="text-one-text-muted hover:text-white text-sm transition-colors duration-300">
                 Privacy Policy
-              </a>
-              <a href="#" className="text-one-text-muted hover:text-white text-sm transition-colors duration-300">
+              </Link>
+              <Link to="/legal#terms" className="text-one-text-muted hover:text-white text-sm transition-colors duration-300">
                 Terms of Service
-              </a>
-              <a href="#" className="text-one-text-muted hover:text-white text-sm transition-colors duration-300">
+              </Link>
+              <Link to="/legal#cookies" className="text-one-text-muted hover:text-white text-sm transition-colors duration-300">
                 Cookie Policy
-              </a>
+              </Link>
             </div>
           </div>
         </div>

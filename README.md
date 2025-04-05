@@ -14,5 +14,3 @@ One-Intelligent is a next-gen AI tools hub that brings together 300+ powerful AI
 - 🔐 Authentication (Sign In / Sign Up)
 
 ---
-
-
