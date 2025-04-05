@@ -57,7 +57,7 @@ const Legal: React.FC = () => {
             {activeTab === 'terms' && (
               <div id="terms" className="prose prose-invert max-w-none">
                 <h2 className="text-2xl font-bold mb-6">Terms of Service</h2>
-                <p className="text-sm text-one-text-muted mb-4">Last updated: January 2024</p>
+                <p className="text-sm text-one-text-muted mb-4">Last updated: January 2025</p>
                 
                 <h3 className="text-xl font-semibold mt-8 mb-4">1. Introduction</h3>
                 <p>Welcome to One-Intelligent, a platform that consolidates AI tools. By accessing or using our service, you agree to be bound by these Terms of Service.</p>
@@ -85,7 +85,7 @@ const Legal: React.FC = () => {
             {activeTab === 'privacy' && (
               <div id="privacy" className="prose prose-invert max-w-none">
                 <h2 className="text-2xl font-bold mb-6">Privacy Policy</h2>
-                <p className="text-sm text-one-text-muted mb-4">Last updated: January 2024</p>
+                <p className="text-sm text-one-text-muted mb-4">Last updated: January 2025</p>
                 
                 <h3 className="text-xl font-semibold mt-8 mb-4">1. Information We Collect</h3>
                 <p>We collect information to provide better services to our users, including:</p>
@@ -126,7 +126,7 @@ const Legal: React.FC = () => {
             {activeTab === 'cookies' && (
               <div id="cookies" className="prose prose-invert max-w-none">
                 <h2 className="text-2xl font-bold mb-6">Cookie Policy</h2>
-                <p className="text-sm text-one-text-muted mb-4">Last updated: January 2024</p>
+                <p className="text-sm text-one-text-muted mb-4">Last updated: January 2025</p>
                 
                 <h3 className="text-xl font-semibold mt-8 mb-4">1. What Are Cookies</h3>
                 <p>Cookies are small pieces of text sent to your browser by a website you visit. They help that website remember information about your visit, like your preferred language and other settings.</p>
